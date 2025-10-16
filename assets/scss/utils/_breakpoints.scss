@@ -1,0 +1,76 @@
+
+// Defining breakpoints
+$xs: 350px;
+$sm: 540px;  
+$md: 768px; 
+$lg: 1024px;
+$xl: 1200px;
+$x2l: 1440px;
+$x3l: 1600px;
+$x4l: 1800px;
+$xxl: 1920px;
+
+$grid-breakpoints: (
+  xs: $xs,
+  sm: $sm,
+  md: $md,
+  lg: $lg,
+  xl: $xl,
+  x2l: $x2l,
+  x3l: $x3l,
+  x4l: $x4l,
+  xxl: $xxl
+);
+
+$grid-columns: 12;
+
+// Import Sass math module
+@use 'sass:math';
+
+// --------------------------------------------------
+// Responsive Grid Utilities
+// --------------------------------------------------
+
+@each $name, $breakpoint in $grid-breakpoints {
+  @media (min-width: $breakpoint) {
+
+    @for $i from 1 through $grid-columns {
+      .col-#{$name}-#{$i} {
+        flex: 0 0 auto;
+        width: math.div($i, $grid-columns) * 100%;
+      }
+    }
+
+    .col-#{$name} {
+      flex: 1 0 0%;
+    }
+
+    .col-#{$name}-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    @for $i from 0 through $grid-columns - 1 {
+      @if ($i > 0) {
+        .offset-#{$name}-#{$i} {
+          margin-left: math.div($i, $grid-columns) * 100%;
+        }
+      }
+    }
+  }
+} 
+
+
+ @mixin respond-to($breakpoint) {
+  $value: map-get($grid-breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "No value found for `#{$breakpoint}` in $grid-breakpoints map.";
+  }
+}

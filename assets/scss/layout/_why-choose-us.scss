@@ -1,0 +1,121 @@
+@use '../utils/' as *;
+@use '../components/card-centerd' as *;
+@use '../utils/breakpoints' as bp;
+
+.why-choose-us {
+    position: relative;
+    z-index: 0;
+    background-attachment: fixed !important;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.7) 100%);
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    &__left {
+        position: relative;
+        z-index: 10;
+    }
+
+    &__title,
+    &__desc,
+    &__subtitle,
+    &__btn {
+        color: $color-white;
+        padding-right: 10px;
+    }
+
+    &__title{
+        max-width: 535px;
+    }
+
+    &__desc {
+        max-width: 900px;
+    }
+
+    &__card {
+        @extend %card1;
+        position: relative;
+
+        &-icon-wrap {
+            @include card-icon-wrap;
+            background: $color-white;
+        }
+
+        &-title {
+            @include card-title;
+        }
+    }
+
+    &__shape {
+        position: absolute;
+        width: 125%;
+        height: calc(100% + 7rem) !important;
+        top: 50%;
+        right: 0;
+        border-radius: 0 200px 200px 0;
+        transform: translateY(-43%);
+        background-position: center right;
+        background-size: contain;
+        z-index: -1 !important;
+
+        @include bp.respond-to(xxl) {
+            height: calc(100% + 5rem) !important;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__award {
+        @include card-centered;
+        position: static !important;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+
+
+        &-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-top: 0;
+            padding: 0;
+            background: transparent;
+            max-width: 95px;
+            max-height: 78px;
+            z-index: 15;
+
+            @include bp.respond-to(sm) {
+                display: none;
+            }
+        }
+
+        &-title {
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 0;
+            letter-spacing: 0.1px;
+            line-height: $line-height-heading;
+            text-align: center;
+        }
+
+        &-text {
+            font-size: 6px;
+            font-weight: 300;
+            letter-spacing: 0.03px;
+            text-align: center;
+        }
+    }
+}

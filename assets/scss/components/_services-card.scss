@@ -1,0 +1,20 @@
+@use '../utils/variables' as *;
+@use '../utils/mixin' as *;
+
+
+.services {
+    &__item {
+        &-icon-wrap {
+            @include card-icon-wrap;
+        }
+
+        &-title {
+            @include card-title;
+        }
+
+        &-desc {
+            @include card-text;
+        }
+    }
+}
+

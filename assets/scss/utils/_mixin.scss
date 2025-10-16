@@ -1,0 +1,177 @@
+@use './variables' as *;
+@use './breakpoints' as *;
+
+@mixin title-xxl($size: clamp(48px, 5vw, 80px),
+  $color: $color-white,
+  $weight: 600,
+  $line-height: 110%,
+  $highlight-color: $color-primary) {
+  font-family: $font-heading;
+  font-size: $size; 
+  font-style: normal;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: -0.8px;
+  color: $color;
+
+  span {
+    color: $highlight-color;
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+}
+
+@mixin title-xl($color: $color-black, $highlight-color: $color-primary) {
+  font-family: $font-heading;
+  font-weight: 500;
+  font-style: normal;
+  line-height: $line-height-heading;
+  letter-spacing: $letter-spacing-h2;
+  font-size: clamp(32px, 4vw + 12px, 56px);
+  color: $color;
+
+  span {
+    color: $highlight-color;
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+}
+
+@mixin subtitle($color: $color-black) {
+  font-family: $font-primary;
+  font-size: clamp(16px, 1vw + 12px, 24px);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 150%;
+  letter-spacing: 0.12px;
+  color: $color;
+}
+
+@mixin title-sm($color: $color-black) {
+  font-size: clamp(18px, 2vw + 1rem, 32px);
+  font-weight: 500;
+  font-family: $font-heading;
+  line-height: $line-height-heading;
+  letter-spacing: 0.32px;
+  color: $color;
+}
+
+@mixin body-text($color: $color-black) {
+  font-family: $font-primary;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: $line-height-body;
+  letter-spacing: $letter-spacing-body;
+  color: $color;
+}
+
+@mixin button($bg, $text, $hover-bg: transparent, $hover-text: $bg) {
+  display: inline-flex;
+  align-items: center;
+  // gap: 12px;
+  font-family: $font-heading;
+  font-size: clamp(14px, 1vw + 10px, 16px);
+  font-weight: 400;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  border: 2px solid $bg;
+  border-radius: 98px;
+  color: $text;
+  background-color: $bg;
+  cursor: pointer;
+  text-align: center;
+  transition: $btn-transition;
+  text-decoration: none;
+  margin-bottom: 0;
+  flex-shrink: 0;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    background-color: $text;
+    border-radius: 50%;
+    transition: $btn-transition;
+    padding: 8px;
+    margin-left: 12px;
+
+    path {
+      fill: $bg;
+      transition: $btn-transition;
+    }
+  }
+
+  &:hover {
+    background-color: $hover-bg;  
+    color: $hover-text; 
+    border-color: $hover-text;  
+
+    svg {
+      background-color: $hover-text;  
+
+      path {
+        fill: $color-white;  
+      }
+    }
+  }
+}
+
+@mixin btn-phn($bg: $color-primary, $icon: $color-white) {
+  background: $bg;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  flex-shrink: 0;
+  transition: $btn-transition;
+  border: 1px solid $color-primary;
+
+  svg path {
+    fill: $icon;
+    transition: $btn-transition;
+  }
+
+  // invert on hover
+  &:hover {
+    background: $icon;
+
+    svg path {
+      fill: $bg;
+    }
+  }
+}
+
+@mixin card-title($color: $color-black) {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: $line-height-heading;
+  letter-spacing: $letter-spacing-h3;
+  margin-bottom: 1.5rem;
+  font-family: $font-heading;
+  color: $color;
+}
+
+@mixin card-text($color: $color-dark-gray) {
+  font-size: clamp(14px, 1vw + 10px, 16px);
+  line-height: $line-height-body;
+  letter-spacing: $letter-spacing-body;
+  color: $color;
+}
+
+@mixin card-icon-wrap($bg: $color-primary) {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: $bg;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  transition: $btn-transition;
+}  

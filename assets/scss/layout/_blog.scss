@@ -1,0 +1,364 @@
+@use '../utils/variables' as*;
+@use '../utils/mixin' as*;
+@use '../utils/breakpoints' as bp;
+
+.blog {
+    background: $color-white;
+
+    &__desc {
+        max-width: 510px;
+    }
+
+    &-card {
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: $card-shadow3;
+
+        @include bp.respond-to(xs) {
+            padding: 1.5rem 10px;
+        }
+
+        &__gallery img {
+            width: 100%;
+        }
+
+        &__header {
+            position: relative;
+        }
+
+        &__image-wrap {
+            max-height: 300px;
+            aspect-ratio: 12 /9;
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            border-radius: 0 8px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        &__image {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
+            transition: $btn-transition;
+        }
+
+        &__badge {
+            position: absolute;
+            left: 1rem;
+            bottom: -1rem;
+            background: $color-primary;
+            max-width: 48px;
+            max-height: 48px;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 50%;
+            z-index: 10;
+            transition: $btn-transition;
+
+        }
+
+        &__date {
+            font-size: 18px;
+            color: $color-white;
+            font-weight: 500;
+        }
+
+        &__month {
+            color: $color-white;
+            font-size: 8px;
+        }
+
+        &__title {
+            @include card-title;
+            margin: 2rem 0 1rem 0;
+        }
+
+        &__text {
+            @include body-text;
+            color: $color-black;
+            margin-bottom: 0;
+        }
+
+        &__btn {
+            display: inline-block !important;
+            text-align: center;
+            transition: $btn-transition;
+             margin-top: 1.5rem;
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+
+            .blog-card {
+                &__image {
+                    transform: scale(1.05);
+                }
+
+                &__badge {
+                    transform: scale(1.1);
+                    background-color: lighten($color-primary, 5%);
+                }
+            }
+        }
+    }
+
+
+
+    &--style-2 {
+        background: $color-dark;
+        margin-top: -2px;
+
+        .blog {
+
+            &__title,
+            &__desc {
+                max-width: 720px;
+                margin-right: auto;
+                margin-left: auto;
+                text-align: center;
+            }
+
+            &__desc {
+                max-width: 600px;
+                color: $color-white;
+            }
+
+            &__btn {
+                background: $color-primary;
+                color: $color-white;
+                border-radius: 8px;
+                padding: 1rem 1.5rem;
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+                border: 1px solid $color-primary;
+                transition: $btn-transition;
+
+                &:hover {
+                    background: transparent;
+                    color: $color-primary;
+                }
+            }
+
+            &__card {
+                background: $color-white;
+                border-radius: 8px;
+                padding: 1.5rem;
+                height: 100%;
+
+                @include bp.respond-to(sm) {
+                    padding: 1rem;
+                }
+            }
+
+            &__img-wrap {
+                max-height: 325px;
+                aspect-ratio: 12 /9;
+                border-radius: 8px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    aspect-ratio: 16 / 12;
+                    object-fit: cover;
+                }
+            }
+
+            &__card-title {
+                @include card-title;
+                margin-top: 1rem;
+                margin-bottom: 0;
+            }
+
+            &__excerpt {
+                @include body-text;
+            }
+        }
+
+        .blog__meta {
+            display: flex;
+            column-gap: 60px;
+            row-gap: 10px;
+
+            &__date,
+            &__reading-time {
+                @include body-text;
+            }
+        }
+    }
+
+    &--style-3 {
+        background: $color-black;
+
+        .blog {
+            &__title {
+                text-align: center;
+                max-width: 780px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            &__desc {
+                color: $color-white;
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            &__list {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+
+                @include bp.respond-to(xl) {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
+
+                @include bp.respond-to(md) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            &__list-item {
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.30);
+                padding: 2rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                align-items: center;
+                grid-template-areas: "item1 item2 item3";
+
+                @include bp.respond-to(xl) {
+                    gap: 1.5rem;
+                    padding: 1.5rem;
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "item2"
+                        "item1"
+                        "item3";
+                }
+
+                @include bp.respond-to(xs) {
+                    padding: 1.5rem 1rem;
+                }
+
+                > :nth-child(1) {
+                    grid-area: item1;
+                }
+
+                > :nth-child(2) {
+                    grid-area: item2;
+                }
+
+                > :nth-child(3) {
+                    grid-area: item3;
+                }
+            }
+
+            &__left {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                @include bp.respond-to(md) {
+                    gap: 1rem;
+                }
+            }
+
+            &__meta {
+                gap: 12px;
+                color: $color-white;
+                align-items: end;
+            }
+
+            &__date {
+                line-height: 100%;
+            }
+
+            &__month-year {
+                color: $color-white;
+                max-width: 60px;
+                font-size: 12px;
+                margin-bottom: -5px;
+                font-family: $font-heading;
+            }
+
+            &__item-title {
+                color: $color-white;
+            }
+
+            &__author {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            &__author-name,
+            &__author-company {
+                color: $color-white;
+            }
+
+            &__thumb-wrap {
+                max-width: 300px;
+                max-height: 250px;
+                margin: 0 auto;
+                border-radius: 8px;
+                overflow: hidden;
+
+                @include bp.respond-to(xl) {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: $primary-transition;
+
+                    &:hover {
+                        scale: 1.3;
+                    }
+                }
+            }
+
+            &__excerpt {
+                margin-top: 1rem;
+                color: $color-white;
+                line-height: 150%;
+                letter-spacing: 0.08px;
+            }
+
+            &__link {
+                @include card-icon-wrap($color-white);
+                transition: $btn-transition;
+                border: 1px solid $color-white;
+
+                svg path {
+                    fill: $color-black;
+                    transition: $btn-transition;
+                }
+
+                &:hover {
+                    background: $color-primary;
+                    border: 1px solid $color-primary;
+
+                    svg path {
+                        fill: $color-white
+                    }
+                }
+            }
+        }
+    }
+}

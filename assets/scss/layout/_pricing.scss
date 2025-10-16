@@ -1,0 +1,119 @@
+@use '../utils/' as *;
+@use '../utils/mixin' as *;
+@use '../utils/breakpoints' as bp;
+
+.pricing {
+    &__title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    &__desc {
+        text-align: center;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    &__card {
+
+        &:hover &-header {
+            background: $color-primary;
+
+            .pricing__card-title,
+            .pricing__price,
+            .pricing__unit,
+            .pricing__subtitle {
+                color: $color-white;
+                transition: $btn-transition;
+            }
+
+            .pricing__icon svg path {
+                fill: $color-white;
+                transition: $btn-transition;
+            }
+        }
+
+        &:hover .pricing__btn {
+            background: $color-white;
+            color: $color-primary;
+        }
+    }
+
+    &__card-header {
+        background: $color-light-pink;
+        padding: 1.5rem 2.5rem;
+        border-radius: 10px;
+        padding-bottom: 7rem;
+        position: relative;
+        transition: $btn-transition;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../../assets/img/shape/services-card-square-shape.png') center center / cover no-repeat;
+            z-index: 1;
+
+        }
+
+        &>* {
+            position: relative;
+            z-index: 15;
+        }
+
+        @include bp.respond-to(md) {
+            padding: 1.5rem 1rem;
+            padding-bottom: 7rem;
+        }
+    }
+
+    &__card-title {
+        @include card-title;
+    }
+
+    &__price {
+        @include title-sm;
+    }
+
+    &__unit {
+        @include body-text;
+    }
+
+    &__btn {
+        padding-left: 3rem;
+        padding-right: 3rem;
+        cursor: pointer;
+    }
+
+    &__features {
+        background: $color-white;
+        box-shadow: $card-shadow2;
+        padding: 2rem;
+        border-radius: 8px;
+        margin-top: -6rem !important;
+        width: calc(100% - 20%);
+        position: relative;
+        z-index: 10;
+
+        @include bp.respond-to(sm) {
+            padding: 1.5rem 10px;
+            width: calc(100% - 1rem);
+        }
+
+        @include bp.respond-to(md) {
+            padding: 1.5rem;
+            width: calc(100% - 10%);
+        }
+    }
+
+    &__item {
+        @include body-text;
+        position: relative;
+        list-style: none;
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+    }
+}

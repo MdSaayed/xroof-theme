@@ -1,0 +1,151 @@
+   @use './variables' as *;
+   @use './mixin' as *;
+   @use './extends' as*;
+
+   .text-center {
+     text-align: center;
+   }
+
+   .text-light {
+     color: $color-white;
+   }
+
+   .bg-primary {
+     background-color: $color-primary;
+   }
+
+   .flex-between {
+     display: flex;
+     justify-content: space-between;
+   }
+
+   .flex-items-center {
+     display: flex;
+     align-items: center;
+   }
+
+   .subtitle {
+     @include subtitle;
+   }
+
+   .subtitle-white {
+     @include subtitle($color-white);
+   }
+
+   .title-xxl {
+     @include title-xxl;
+   }
+
+   .title-xl {
+     @include title-xl;
+   }
+
+   .title-xl-white {
+     @include title-xl($color-white);
+   }
+
+   .card-title {
+     @include card-title;
+   }
+
+   .body-text {
+     @include body-text;
+   }
+
+   .btn-icon-left-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-left: 0px;
+
+     svg {
+       margin-right: 12px;
+     }
+   }
+
+   .btn-icon-right-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-right: 10px;
+
+     svg {
+       margin-left: 12px !important;
+     }
+   }
+
+   .btn-icon-right-secondary {
+     @include button($color-white, $color-primary, $color-primary, $color-white);
+     padding-right: 0;
+
+     svg {
+       margin-right: 12px;
+     }
+
+     &:hover svg path {
+       fill: $color-primary;
+     }
+   }
+
+   .btn-icon-left-secondary {
+     @include button($color-white, $color-primary, $color-primary, $color-white);
+     padding-left: 0;
+
+     svg {
+       margin-right: 12px !important;
+     }
+
+     &:hover svg path {
+       fill: $color-primary;
+     }
+   }
+
+   .btn-phn-primary {
+     @include btn-phn;
+
+     &:hover {
+       background: transparent;
+     }
+   }
+
+   .btn-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+   }
+
+   .flex-items-center {
+     display: flex;
+     align-items: center;
+   }
+
+   .mw-510 {
+     max-width: 510px !important;
+   }
+
+   .bg-light-pink {
+     background: #FFF4F5 !important;
+   }
+
+   .title-hidden {
+     display: none;
+   }
+
+   .main {
+     overflow: hidden;
+   }
+
+   .hidden-anim {
+     opacity: 0;
+     visibility: hidden;
+   }
+
+
+   // Hero Two Animation
+   #hero-particles {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 9999;
+     pointer-events: none;
+   }
+
+   .wpcf7-spinner{
+    display: none !important;
+   }

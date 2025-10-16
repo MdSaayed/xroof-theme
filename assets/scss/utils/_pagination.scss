@@ -1,0 +1,41 @@
+@use './variables' as*;
+
+//  Pagination
+.blog__pagination {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+nav.blog__pagination ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+nav.blog__pagination ul li a,
+
+nav.blog__pagination ul li span {
+    width: 40px;
+    border: 1px solid $color-primary;
+    height: 40px;
+    color: $color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+    }
+}
+
+nav.blog__pagination ul li a {
+    color: $color-primary;
+}
+
+span.page-numbers.current {
+    color: $color-white;
+    background: $color-primary;
+}
