@@ -12,7 +12,7 @@
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="text-center"><?php _e('No Posts To Display.'); ?></p>
+                <p class="text-center"><?php _e('No Page Content To Display.','xroof'); ?></p>
             <?php endif; ?>
 
             <?php xroof_navigation(); ?>

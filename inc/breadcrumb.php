@@ -36,8 +36,9 @@ function xroof_breadcrumb()
 
     $breadcrumb_bg_img = get_theme_mod(
         'breadcrumb_bg_img',
-        esc_url(get_template_directory_uri() . '/assets/img/global/breadcrumbs-bg.png')
+        get_template_directory_uri() . '/assets/img/global/breadcrumbs-bg.png'
     );
+
     $breadcrumb_switch = (function_exists('get_field') && get_field('breadcrumb_test', $_id) !== null)
         ? get_field('breadcrumb_test', $_id)
         : true;

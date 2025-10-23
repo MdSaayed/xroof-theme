@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* =============================
 * 2. Dynamically set BG
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_bg_set() {
   const bgDivs = document.querySelectorAll("[data-bg-img]");
   if (bgDivs.length > 0) {
     bgDivs.forEach((div) => {
@@ -64,12 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-});
-
+}
+xroof_bg_set();
+ 
 /* =============================
 * 3. Hero Bg Slider Home Two
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_hero_slider_1() {
   const bgSliderContainer = document.querySelector("#hero-banner-2");
   const heroSection = document.querySelector("#hero-2");
 
@@ -121,12 +122,12 @@ document.addEventListener("DOMContentLoaded", function () {
       bgSlider.goTo("next");
     });
   }
-});
+}
 
 /* =============================
 * 4. Counter
 ============================= */
-document.addEventListener('DOMContentLoaded', () => {
+function xroof_counter() {
   const counters = document.querySelectorAll('[stat-data-start][stat-data-end]');
 
   const animateCounter = (el) => {
@@ -172,66 +173,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
 
   counters.forEach(el => observer.observe(el));
-});
+}
 
 /* =============================
 * 5. Glightbox
 ============================= */
-const lightbox = GLightbox({
-  selector: '.glightbox',
-  autoplayVideos: true
-});
-
+function xroof_hero_3() {
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+    autoplayVideos: true
+  });
+}
 
 /* =============================
 * 6. Faq
 ============================= */
-// document.querySelectorAll('.faq__item').forEach(item => {
-//   const button = item.querySelector('.faq__question-wrap');
-//   const answer = item.querySelector('.faq__answer');
+function xroof_faq_init() {
+  document.querySelectorAll('.faq__item').forEach(item => {
+    const button = item.querySelector('.faq__question-wrap');
+    const answer = item.querySelector('.faq__answer');
 
-//   button.addEventListener('click', () => {
-//     const isActive = item.classList.contains('active');
+    button.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
 
-//     document.querySelectorAll('.faq__item').forEach(i => {
-//       i.classList.remove('active');
-//       i.querySelector('.faq__answer').style.height = 0;
-//     });
+      document.querySelectorAll('.faq__item').forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq__answer').style.height = 0;
+      });
 
-//     if (!isActive) {
-//       item.classList.add('active');
-//       answer.style.height = "auto";
-//     }
-//   });
-// });
-
-/* =============================
-* 7. Hero Two Slider
-============================= */
-document.addEventListener("DOMContentLoaded", function () {
-  const hero_two_slider = document.querySelector('#hero-two-slider');
-
-  if (hero_two_slider) {
-    const hero_two_slider = tns({
-      container: '#hero-two-slider',
-      items: 1,
-      slideBy: 'page',
-      autoplay: true,
-      autoplayTimeout: 3000,
-      autoplayButtonOutput: false,
-      controls: false,
-      nav: false,
-      loop: true,
-      lazyload: true,
-      gutter: 10
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.height = "auto";
+      }
     });
-  }
-});
+  });
+}
 
 /* =============================
 * 8. Projects Two Slider
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_project_slider() {
   const slider = document.querySelector('#project-slider-1');
   if (!slider) return;
 
@@ -319,13 +300,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener('resize', updateSlider);
   updateSlider();
-});
+}
 
 /* =============================
 * 9. Team Two
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_team_slider_1() {
   const team_slider_element = document.querySelector('#team-2');
+
   if (team_slider_element) {
     const wrapper = document.querySelector('.team__cards');
     const slides = document.querySelectorAll('.team__card');
@@ -457,12 +439,12 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('resize', updateSlider);
     updateSlider();
   }
-});
+}
 
 /* =============================
 * 10. Team Three
 ============================= */
-document.addEventListener('DOMContentLoaded', function () {
+function xroof_team_slider_2() {
   const team_slider_three = document.querySelector('#team-slider-3');
 
   if (team_slider_three) {
@@ -488,14 +470,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-});
+}
 
 /* =============================
 * 11. Award Area
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_award() {
   const awardItems = document.querySelectorAll('.award__item');
-
   if (awardItems) {
     awardItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -504,99 +485,100 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-});
+}
+
 /* =============================
 * 12. Contact form input date
 ============================= */
-document.addEventListener('DOMContentLoaded', function () {
+function xroof_date_input() {
   const today = new Date().toISOString().split("T")[0];
   const dateInput = document.getElementById("dateInput");
 
   if (dateInput) {
     dateInput.value = today;
   }
-});
+}
 
 /* =============================
 * 13. Offcanvas
 ============================= */
-// document.addEventListener('DOMContentLoaded', function () {
-//   const offcanvas = document.querySelector('.offcanvas');
-//   const offcanvasToggle = document.querySelector('#offcanvas-toggle');
-//   const offcanvasClose = document.querySelector('#offcanvas-close');
-//   const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
-//   const body = document.body;
+function xroof_offcanvas() {
+  const offcanvas = document.querySelector('.offcanvas');
+  const offcanvasToggle = document.querySelector('#offcanvas-toggle');
+  const offcanvasClose = document.querySelector('#offcanvas-close');
+  const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
+  const body = document.body;
 
-//   if (offcanvas) {
-//     const overlay = document.createElement('div');
-//     overlay.classList.add('offcanvas-overlay');
-//     document.body.appendChild(overlay);
+  if (offcanvas) {
+    const overlay = document.createElement('div');
+    overlay.classList.add('offcanvas-overlay');
+    document.body.appendChild(overlay);
 
-//     const openOffcanvas = () => {
-//       offcanvas.classList.add('active');
-//       overlay.classList.add('offcanvas-overlay---active');
-//       body.classList.add('offcanvas-active');
-//     };
+    const openOffcanvas = () => {
+      offcanvas.classList.add('active');
+      overlay.classList.add('offcanvas-overlay---active');
+      body.classList.add('offcanvas-active');
+    };
 
-//     const closeOffcanvas = () => {
-//       offcanvas.classList.remove('active');
-//       overlay.classList.remove('offcanvas-overlay---active');
-//       body.classList.remove('offcanvas-active');
-//     };
+    const closeOffcanvas = () => {
+      offcanvas.classList.remove('active');
+      overlay.classList.remove('offcanvas-overlay---active');
+      body.classList.remove('offcanvas-active');
+    };
 
-//     offcanvasToggle.addEventListener('click', openOffcanvas);
+    offcanvasToggle.addEventListener('click', openOffcanvas);
 
-//     if (offcanvasClose) {
-//       offcanvasClose.addEventListener('click', closeOffcanvas);
-//     }
+    if (offcanvasClose) {
+      offcanvasClose.addEventListener('click', closeOffcanvas);
+    }
 
-//     overlay.addEventListener('click', closeOffcanvas);
+    overlay.addEventListener('click', closeOffcanvas);
 
-//     const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
-//     parentLinks.forEach(link => {
-//       link.addEventListener('click', function (e) {
-//         e.preventDefault();
-//         this.classList.toggle('active');
+    const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
+    parentLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        this.classList.toggle('active');
 
-//         const submenu = this.nextElementSibling;
-//         if (submenu) {
-//           submenu.classList.toggle('active');
-//         }
-//       });
-//     });
+        const submenu = this.nextElementSibling;
+        if (submenu) {
+          submenu.classList.toggle('active');
+        }
+      });
+    });
 
-//     document.addEventListener('click', function (e) {
-//       if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target) && !overlay.contains(e.target)) {
-//         closeOffcanvas();
-//       }
-//     });
+    document.addEventListener('click', function (e) {
+      if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target) && !overlay.contains(e.target)) {
+        closeOffcanvas();
+      }
+    });
 
-//     const navLinks = offcanvasNavMenu.querySelectorAll('.nav__link');
-//     navLinks.forEach(link => {
-//       link.addEventListener('click', function () {
-//         const parentItem = this.parentElement;
-//         if (!parentItem.classList.contains('nav__item-has-children')) {
-//           closeOffcanvas();
-//         }
-//       });
-//     });
+    const navLinks = offcanvasNavMenu.querySelectorAll('.nav__link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        const parentItem = this.parentElement;
+        if (!parentItem.classList.contains('nav__item-has-children')) {
+          closeOffcanvas();
+        }
+      });
+    });
 
-//     window.addEventListener('resize', function () {
-//       if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
-//         closeOffcanvas();
-//       }
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
+        closeOffcanvas();
+      }
 
-//       if (window.innerWidth > 1200) {
-//         document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
-//           link.classList.remove('active');
-//         });
-//         document.querySelectorAll('.nav__submenu').forEach(submenu => {
-//           submenu.classList.remove('active');
-//         });
-//       }
-//     });
-//   }
-// });
+      if (window.innerWidth > 1200) {
+        document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelectorAll('.nav__submenu').forEach(submenu => {
+          submenu.classList.remove('active');
+        });
+      }
+    });
+  }
+}
 
 /* =============================
 * 14. Info Panel
@@ -648,7 +630,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /* =============================
 * 15. Nav Arrow Toggle
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_nav_arrow_toggle() {
   const arrow = document.querySelector('.nav__arrow');
   const menuWrap = document.querySelector('.nav__menu');
   const breakpoint = 768;
@@ -717,12 +699,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Recalculate width on resize
   window.addEventListener('resize', handleResize);
-});
+}
 
 /* =============================
 * 16. Services Video
 ============================= */
-document.addEventListener("DOMContentLoaded", () => {
+function xroof_video_play() {
   const video = document.getElementById("bgVideo");
   const playBtn = document.getElementById("playBtn");
 
@@ -750,12 +732,12 @@ document.addEventListener("DOMContentLoaded", () => {
       playBtn.innerHTML = playIcon;
     }
   });
-});
+}
 
 /* =============================
 * 20. Project filter
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_project_filter() {
   const grid = document.querySelector('#projects-grid');
 
   if (!grid) return;
@@ -781,7 +763,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-});
+}
 
 /* =============================
 * 17. Scroll Progress Circle
@@ -849,7 +831,7 @@ initCircularProgress();
 /* =============================
 * 18. Hero Two bg Animation
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_hero_bg_animation() {
   if (typeof particlesJS !== "undefined" && document.getElementById("hero-particles")) {
     particlesJS("hero-particles", {
       particles: {
@@ -875,12 +857,11 @@ document.addEventListener("DOMContentLoaded", function () {
       retina_detect: true
     });
   }
-});
-
+}
 /* =============================
 * 19. Blog Gallery
 ============================= */
-document.addEventListener("DOMContentLoaded", function () {
+function xroof_blog_gallery_slider() {
   const element = document.querySelector('.blog-card__gallery');
   if (!element) return;
 
@@ -897,7 +878,71 @@ document.addEventListener("DOMContentLoaded", function () {
     mouseDrag: true,
     gutter: 0,
   });
+}
+
+/* =============================
+* 19. Elementor frontend View
+============================= */
+
+window.addEventListener("elementor/frontend/init", function () {
+  if (typeof elementorFrontend !== "undefined") {
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/faq_widget.default',
+      xroof_faq_init
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-award.default',
+      xroof_award
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-services-video.default',
+      xroof_video_play
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-hero-3.default',
+      xroof_hero_3
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof_project_widget_1.default',
+      xroof_project_filter
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-project-slider.default',
+      xroof_project_slider
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-team-slider-1.default',
+      xroof_team_slider_1
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-team-slider-2.default',
+      xroof_team_slider_2
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-hero-2.default',
+      xroof_hero_slider_1
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-hero-2.default',
+      xroof_hero_slider_1,
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-hero-2.default',
+      xroof_hero_bg_animation
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-contact-1.default',
+      xroof_date_input
+    );
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/global',
+      function () {
+        xroof_bg_set();
+        xroof_counter();
+        xroof_blog_gallery_slider();
+        xroof_nav_arrow_toggle();
+        xroof_offcanvas();
+      }
+    );
+  }
 });
-
-
- 

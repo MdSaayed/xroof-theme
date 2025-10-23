@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <section class="error error--style-1"
-    data-bg-img="<?php echo get_template_directory_uri(); ?>/assets/img/global/error-bg.png">
+    data-bg-img="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/global/error-bg.png">
     <div class="error__container">
         <div class="error__area">
             <h1 class="error__title pb-4 pb-xl-8">Error 404</h1>
@@ -12,7 +12,7 @@
             </p>
 
             <div class="error__btn-wrap d-flex justify-content-center">
-                <a href="<?php echo get_home_url(); ?>" class="error__btn btn-icon-right-primary">
+                <a href="<?php esc_url(get_template_directory_uri()); ?>" class="error__btn btn-icon-right-primary">
                     Back To Home
                     <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
                         <path

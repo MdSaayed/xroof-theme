@@ -8,6 +8,8 @@
 </head>
 
 <body class="<?php body_class(); ?>">
+    <?php wp_body_open(); ?>
+    
     <?php echo get_template_part('template-parts/header/header-1') ?>
 
     <main class="main">

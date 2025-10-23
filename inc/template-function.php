@@ -266,8 +266,8 @@ function xroof_blog_share()
     ?>
 
     <div class="blog-details__share-links">
-        
-        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_url; ?>" 
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($post_url); ?>"
             class="blog-details__share-link popup-share">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                 <path
@@ -276,7 +276,7 @@ function xroof_blog_share()
             </svg>
         </a>
 
-        <a href="https://twitter.com/intent/tweet?url=<?php echo $post_url; ?>&text=<?php echo $post_title; ?>"
+        <a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($post_url); ?>&text=<?php echo esc_html($post_title); ?>"
             class="blog-details__share-link popup-share">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                 <path
@@ -285,7 +285,7 @@ function xroof_blog_share()
             </svg>
         </a>
 
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $post_url; ?>" target="_blank"
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_url($post_url); ?>" target="_blank"
             class="blog-details__share-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 448 512" fill="white">
                 <path d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 
@@ -299,22 +299,21 @@ function xroof_blog_share()
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var shareLinks = document.querySelectorAll('.popup-share');
-        shareLinks.forEach(function(link) {
-            link.removeAttribute('target'); 
-            
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                var url = this.href;
-                var width = 600;
-                var height = 400;
-                var left = (screen.width / 2) - (width / 2);
-                var top = (screen.height / 2) - (height / 2);
-                window.open(url, 'ShareWindow', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+        document.addEventListener('DOMContentLoaded', function () {
+            var shareLinks = document.querySelectorAll('.popup-share');
+            shareLinks.forEach(function (link) {
+                link.removeAttribute('target');
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var url = this.href;
+                    var width = 600;
+                    var height = 400;
+                    var left = (screen.width / 2) - (width / 2);
+                    var top = (screen.height / 2) - (height / 2);
+                    window.open(url, 'ShareWindow', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+                });
             });
         });
-    });
     </script>
 
     <?php

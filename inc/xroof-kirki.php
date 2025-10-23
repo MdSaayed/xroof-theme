@@ -393,7 +393,7 @@ function xroof_header_info_slide_box_section()
     new \Kirki\Field\URL(
         [
             'settings' => 'xroof_info_box_button_url',
-            'label' => esc_html__('Button Url', 'kirki'),
+            'label' => esc_html__('Button Url', 'xroof'),
             'section' => 'xroof_info_slide_box',
             'default' => '#',
             'priority' => 10,
@@ -438,7 +438,7 @@ function xroof_header_info_slide_box_section()
     new \Kirki\Field\URL(
         [
             'settings' => 'xroof_info_x_url',
-            'label' => esc_html__('X(Twitter) Url', 'kirki'),
+            'label' => esc_html__('X(Twitter) Url', 'xroof'),
             'section' => 'xroof_info_slide_box',
             'default' => '#',
             'priority' => 10,
@@ -447,7 +447,7 @@ function xroof_header_info_slide_box_section()
     new \Kirki\Field\URL(
         [
             'settings' => 'xroof_info_facebook_url',
-            'label' => esc_html__('Facebook Url', 'kirki'),
+            'label' => esc_html__('Facebook Url', 'xroof'),
             'section' => 'xroof_info_slide_box',
             'default' => '#',
             'priority' => 10,
@@ -456,7 +456,7 @@ function xroof_header_info_slide_box_section()
     new \Kirki\Field\URL(
         [
             'settings' => 'xroof_info_behance_url',
-            'label' => esc_html__('Behance Url', 'kirki'),
+            'label' => esc_html__('Behance Url', 'xroof'),
             'section' => 'xroof_info_slide_box',
             'default' => '#',
             'priority' => 10,
@@ -465,7 +465,7 @@ function xroof_header_info_slide_box_section()
     new \Kirki\Field\URL(
         [
             'settings' => 'xroof_info_instagram_url',
-            'label' => esc_html__('Instagram Url', 'kirki'),
+            'label' => esc_html__('Instagram Url', 'xroof'),
             'section' => 'xroof_info_slide_box',
             'default' => '#',
             'priority' => 10,

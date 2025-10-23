@@ -5,38 +5,38 @@ if (!defined('ABSPATH'))
 // Newsletter Form
 class Xroof_Newsletter_Widget extends WP_Widget
 {
-
     public function __construct()
     {
         parent::__construct(
             'xroof_newsletter_widget',
-            __('Xroof: Newsletter Form', 'xroof'),
-            array('description' => __('Footer Newsletter form with editable text', 'xroof'))
+            esc_html__('Xroof: Newsletter Form', 'xroof'),
+            array('description' => esc_html__('Footer Newsletter form with editable text', 'xroof'))
         );
     }
 
     public function widget($args, $instance)
     {
-        echo $args['before_widget'];
-
-        $title = !empty($instance['title']) ? $instance['title'] : '';
-        $desc = !empty($instance['desc']) ? $instance['desc'] : '';
-
-        if ($title) {
-            echo '<h5 class="footer__title mb-8">' . esc_html($title) . '</h5>';
+        if (!empty($args['before_widget'])) {
+            echo xroof_kses($args['before_widget']);
         }
 
-        if ($desc) {
-            echo '<p class="footer__newsletter-text body-text mb-4">' . esc_html($desc) . '</p>';
+        if (!empty($instance['title'])) {
+            // If you want to allow limited HTML like <strong>, use xroof_kses() instead of esc_html()
+            echo '<h5 class="footer__title mb-8">' . esc_html($instance['title']) . '</h5>';
         }
 
+        if (!empty($instance['desc'])) {
+            echo '<p class="footer__newsletter-text body-text mb-4">' . esc_html($instance['desc']) . '</p>';
+            // OR: echo '<p class="footer__newsletter-text body-text mb-4">' . xroof_kses($instance['desc']) . '</p>';
+        }
         ?>
-        <form class="d-flex mt-10">
+
+        <form class="d-flex mt-10" method="post" action="#">
             <div class="footer__newsletter-form-group d-flex w-100">
-                <input type="email" class="newsletter-form form-control"
-                    placeholder="<?php esc_attr_e('Email Address', 'xroof'); ?>">
-                <button type="submit" class="newsletter-form-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 11 8">
+                <input type="email" class="newsletter-form form-control" name="newsletter_email"
+                    placeholder="<?php echo esc_attr__('Email Address', 'xroof'); ?>" required>
+                <button type="submit" class="newsletter-form-btn" aria-label="<?php echo esc_attr__('Submit', 'xroof'); ?>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 11 8" aria-hidden="true">
                         <path
                             d="M9.887 3.655c.19.19.19.499 0 .69L6.783 7.449a.437.437 0 0 1-.69 0 .487.487 0 0 1 0-.69L8.853 4 6.093 1.241a.487.487 0 0 1 0-.69.437.437 0 0 1 .69 0L9.887 3.655ZM9.542 4v.488H.458V3.512h9.084V4Z"
                             fill="#EE212B"></path>
@@ -44,27 +44,30 @@ class Xroof_Newsletter_Widget extends WP_Widget
                 </button>
             </div>
         </form>
-        <?php
 
-        echo $args['after_widget'];
+        <?php
+        if (!empty($args['after_widget'])) {
+            echo xroof_kses($args['after_widget']);
+        }
     }
 
     public function form($instance)
-    {
-        $title = !empty($instance['title']) ? $instance['title'] : '';
-        $desc = !empty($instance['desc']) ? $instance['desc'] : '';
-        ?>
+    { ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title:', 'xroof'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+                <?php esc_html_e('Title:', 'xroof'); ?>
+            </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
-                value="<?php echo esc_attr($title); ?>" />
+                value="<?php echo esc_attr(!empty($instance['title']) ? $instance['title'] : ''); ?>" />
         </p>
+
         <p>
-            <label
-                for="<?php echo esc_attr($this->get_field_id('desc')); ?>"><?php esc_html_e('Description:', 'xroof'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('desc')); ?>">
+                <?php esc_html_e('Description:', 'xroof'); ?>
+            </label>
             <textarea class="widefat" id="<?php echo esc_attr($this->get_field_id('desc')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('desc')); ?>"><?php echo esc_textarea($desc); ?></textarea>
+                name="<?php echo esc_attr($this->get_field_name('desc')); ?>"><?php echo esc_textarea(!empty($instance['desc']) ? $instance['desc'] : ''); ?></textarea>
         </p>
         <?php
     }
@@ -72,8 +75,8 @@ class Xroof_Newsletter_Widget extends WP_Widget
     public function update($new_instance, $old_instance)
     {
         $instance = array();
-        $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
-        $instance['desc'] = (!empty($new_instance['desc'])) ? sanitize_textarea_field($new_instance['desc']) : '';
+        $instance['title'] = !empty($new_instance['title']) ? sanitize_text_field($new_instance['title']) : '';
+        $instance['desc'] = !empty($new_instance['desc']) ? sanitize_textarea_field($new_instance['desc']) : '';
         return $instance;
     }
 }
@@ -93,7 +96,7 @@ class Xroof_Recent_Posts_Widget extends WP_Widget
 
     public function widget($args, $instance)
     {
-        echo $args['before_widget'];
+        echo xroof_kses($args['before_widget']);
 
         $title = !empty($instance['title']) ? $instance['title'] : __('Recent Post', 'xroof');
         $number = !empty($instance['number']) ? absint($instance['number']) : 3;
@@ -148,7 +151,7 @@ class Xroof_Recent_Posts_Widget extends WP_Widget
 
         echo '</div>'; // .sidebar__posts
 
-        echo $args['after_widget'];
+        echo xroof_kses($args['after_widget']);
     }
 
     public function form($instance)
@@ -201,37 +204,37 @@ class Xroof_Recent_Posts_Widget extends WP_Widget
 }
 
 // Services List
-class Xroof_Services_list_Widget extends WP_Widget
+class Xroof_Services_List_Widget extends WP_Widget
 {
-
     public function __construct()
     {
         parent::__construct(
             'xroof_sidebar_services_widget',
-            __('Xroof Sidebar Services', 'xroof'),
-            ['description' => __('Displays list of service posts in the sidebar', 'xroof')]
+            esc_html__('Xroof Sidebar Services', 'xroof'),
+            ['description' => esc_html__('Displays list of service posts in the sidebar', 'xroof')]
         );
     }
 
     // Output on frontend
     public function widget($args, $instance)
     {
-        echo $args['before_widget'];
+        // ✅ Output raw widget wrappers (these contain HTML)
+        echo xroof_kses($args['before_widget']);
 
-        $title = !empty($instance['title']) ? $instance['title'] : __('Our Services', 'xroof');
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Our Services', 'xroof');
+        $number = !empty($instance['number']) ? absint($instance['number']) : 8;
 
         // Query service posts
         $query = new WP_Query([
             'post_type' => 'service',
-            'posts_per_page' => !empty($instance['number']) ? absint($instance['number']) : 8,
+            'posts_per_page' => $number,
             'post_status' => 'publish',
             'orderby' => 'date',
             'order' => 'DESC',
         ]);
-
         ?>
         <div class="sidebar__services">
-            <?php if ($title): ?>
+            <?php if (!empty($title)): ?>
                 <h2 class="sidebar__title pb-6 pb-xl-8 mt-6 mt-xl-8">
                     <?php echo esc_html($title); ?> :
                 </h2>
@@ -242,29 +245,33 @@ class Xroof_Services_list_Widget extends WP_Widget
                     <?php while ($query->have_posts()):
                         $query->the_post(); ?>
                         <li class="sidebar__item">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            <a href="<?php echo esc_url(get_permalink()); ?>">
+                                <?php echo esc_html(get_the_title()); ?>
+                            </a>
                         </li>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <li class="sidebar__item"><?php _e('No services found.', 'xroof'); ?></li>
+                    <li class="sidebar__item"><?php esc_html_e('No services found.', 'xroof'); ?></li>
                 <?php endif; ?>
             </ul>
         </div>
         <?php
 
         wp_reset_postdata();
-        echo $args['after_widget'];
+
+        // ✅ Output raw widget closing wrapper
+        echo xroof_kses($args['after_widget']);
     }
 
     // Admin form
     public function form($instance)
     {
-        $title = !empty($instance['title']) ? $instance['title'] : __('Our Services', 'xroof');
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Our Services', 'xroof');
         $number = !empty($instance['number']) ? absint($instance['number']) : 8;
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php _e('Title:', 'xroof'); ?>
+                <?php esc_html_e('Title:', 'xroof'); ?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
@@ -273,7 +280,7 @@ class Xroof_Services_list_Widget extends WP_Widget
 
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('number')); ?>">
-                <?php _e('Number of services to show:', 'xroof'); ?>
+                <?php esc_html_e('Number of services to show:', 'xroof'); ?>
             </label>
             <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('number')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="number" step="1" min="1"
@@ -299,51 +306,58 @@ class Xroof_Appointment_Card_Widget extends WP_Widget
     {
         parent::__construct(
             'xroof_appointment_card',
-            esc_html__('Xroof Appointment Card', 'xroof-core'),
-            ['description' => esc_html__('Displays an appointment card with contact info', 'xroof-core')]
+            esc_html__('Xroof Appointment Card', 'xroof'),
+            ['description' => esc_html__('Displays an appointment card with contact info', 'xroof')]
         );
     }
 
     public function widget($args, $instance)
     {
-        echo $args['before_widget'];
+        if (!empty($args['before_widget'])) {
+            echo xroof_kses($args['before_widget']);
+        }
 
-        // Default values
         $defaults = [
             'background_image' => get_template_directory_uri() . '/assets/img/global/appointment-card-img.png',
             'heading' => 'Need a Roofing Services',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus',
             'button_text' => 'Book An Appointment',
             'button_url' => home_url('/contact'),
-            'phone_number' => '+1234567890'
+            'phone_number' => '+1234567890',
         ];
 
         $instance = wp_parse_args((array) $instance, $defaults);
 
-        $background_image = esc_url($instance['background_image']);
-        $heading = esc_html($instance['heading']);
-        $description = esc_html($instance['description']);
-        $button_text = esc_html($instance['button_text']);
-        $button_url = esc_url($instance['button_url']);
-        $phone_number = esc_attr($instance['phone_number']);
-
-        // Only render markup if all required fields are filled
-        if ($background_image && $heading && $description && $button_text && $button_url && $phone_number):
+        if (
+            !empty($instance['background_image']) &&
+            !empty($instance['heading']) &&
+            !empty($instance['description']) &&
+            !empty($instance['button_text']) &&
+            !empty($instance['button_url']) &&
+            !empty($instance['phone_number'])
+        ):
             ?>
-            <div class="sidebar__appointment-card mt-6 mt-xl-8" data-bg-img="<?php echo $background_image; ?>">
+            <div class="sidebar__appointment-card mt-6 mt-xl-8" data-bg-img="<?php echo esc_url($instance['background_image']); ?>">
                 <div class="appointment-card__body">
-                    <h2 class="appointment-card__heading mb-4"><?php echo $heading; ?></h2>
+                    <h2 class="appointment-card__heading mb-4">
+                        <?php echo esc_html($instance['heading']); ?>
+                    </h2>
+
                     <p class="appointment-card__description body-text">
-                        <?php echo $description; ?>
+                        <?php echo esc_html($instance['description']); ?>
+                        <!-- OR use xroof_kses() if you want to allow limited HTML -->
+                        <!-- <?php echo xroof_kses($instance['description']); ?> -->
                     </p>
 
                     <div class="appointment-card__actions mt-6 mt-xl-8">
-                        <a href="<?php echo $button_url; ?>" class="appointment-card__btn btn btn-primary">
-                            <?php echo $button_text; ?>
+                        <a href="<?php echo esc_url($instance['button_url']); ?>" class="appointment-card__btn btn btn-primary">
+                            <?php echo esc_html($instance['button_text']); ?>
                         </a>
 
-                        <a href="tel:<?php echo $phone_number; ?>" class="appointment-card__btn appointment-card__btn--phn">
-                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+                        <a href="tel:<?php echo esc_attr($instance['phone_number']); ?>"
+                            class="appointment-card__btn appointment-card__btn--phn"
+                            aria-label="<?php echo esc_attr__('Call Us', 'xroof'); ?>">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden="true">
                                 <path
                                     d="M19.7529 15.604L16.956 12.8071C15.9571 11.8082 14.2589 12.2078 13.8594 13.5063C13.5597 14.4054 12.5608 14.9048 11.6618 14.705C9.66395 14.2055 6.96691 11.6084 6.46746 9.51069C6.16779 8.61164 6.76713 7.61273 7.66615 7.3131C8.96472 6.91354 9.36428 5.2154 8.36538 4.2165L5.56845 1.41957C4.76932 0.720333 3.57064 0.720333 2.87141 1.41957L0.973487 3.31748C-0.924431 5.31529 1.17327 10.6095 5.86812 15.3043C10.563 19.9992 15.8572 22.1968 17.855 20.199L19.7529 18.301C20.4522 17.5019 20.4522 16.3032 19.7529 15.604Z"
                                     fill="#EE212B" />
@@ -355,7 +369,9 @@ class Xroof_Appointment_Card_Widget extends WP_Widget
             <?php
         endif;
 
-        echo $args['after_widget'];
+        if (!empty($args['after_widget'])) {
+            echo xroof_kses($args['after_widget']);
+        }
     }
 
     public function form($instance)
@@ -366,59 +382,63 @@ class Xroof_Appointment_Card_Widget extends WP_Widget
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus',
             'button_text' => 'Book An Appointment',
             'button_url' => home_url('/contact'),
-            'phone_number' => '+1234567890'
+            'phone_number' => '+1234567890',
         ];
 
         $instance = wp_parse_args((array) $instance, $defaults);
-
-        $background_image = esc_url($instance['background_image']);
-        $heading = esc_attr($instance['heading']);
-        $description = esc_attr($instance['description']);
-        $button_text = esc_attr($instance['button_text']);
-        $button_url = esc_url($instance['button_url']);
-        $phone_number = esc_attr($instance['phone_number']);
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('heading'); ?>"><?php esc_html_e('Heading:', 'xroof-core'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('heading'); ?>"
-                name="<?php echo $this->get_field_name('heading'); ?>" type="text" value="<?php echo $heading; ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('heading')); ?>">
+                <?php esc_html_e('Heading:', 'xroof'); ?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('heading')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('heading')); ?>" type="text"
+                value="<?php echo esc_attr($instance['heading']); ?>">
         </p>
 
         <p>
-            <label
-                for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description:', 'xroof-core'); ?></label>
-            <textarea class="widefat" id="<?php echo $this->get_field_id('description'); ?>"
-                name="<?php echo $this->get_field_name('description'); ?>"><?php echo $description; ?></textarea>
+            <label for="<?php echo esc_attr($this->get_field_id('description')); ?>">
+                <?php esc_html_e('Description:', 'xroof'); ?>
+            </label>
+            <textarea class="widefat" id="<?php echo esc_attr($this->get_field_id('description')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('description')); ?>"><?php echo esc_textarea($instance['description']); ?></textarea>
         </p>
 
         <p>
-            <label
-                for="<?php echo $this->get_field_id('button_text'); ?>"><?php esc_html_e('Button Text:', 'xroof-core'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>"
-                name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo $button_text; ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('button_text')); ?>">
+                <?php esc_html_e('Button Text:', 'xroof'); ?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('button_text')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('button_text')); ?>" type="text"
+                value="<?php echo esc_attr($instance['button_text']); ?>">
         </p>
 
         <p>
-            <label
-                for="<?php echo $this->get_field_id('button_url'); ?>"><?php esc_html_e('Button URL:', 'xroof-core'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('button_url'); ?>"
-                name="<?php echo $this->get_field_name('button_url'); ?>" type="url" value="<?php echo $button_url; ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('button_url')); ?>">
+                <?php esc_html_e('Button URL:', 'xroof'); ?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('button_url')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('button_url')); ?>" type="url"
+                value="<?php echo esc_url($instance['button_url']); ?>">
         </p>
 
         <p>
-            <label
-                for="<?php echo $this->get_field_id('phone_number'); ?>"><?php esc_html_e('Phone Number:', 'xroof-core'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('phone_number'); ?>"
-                name="<?php echo $this->get_field_name('phone_number'); ?>" type="text" value="<?php echo $phone_number; ?>">
+            <label for="<?php echo esc_attr($this->get_field_id('phone_number')); ?>">
+                <?php esc_html_e('Phone Number:', 'xroof'); ?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('phone_number')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('phone_number')); ?>" type="text"
+                value="<?php echo esc_attr($instance['phone_number']); ?>">
         </p>
 
         <p>
-            <label
-                for="<?php echo $this->get_field_id('background_image'); ?>"><?php esc_html_e('Background Image:', 'xroof-core'); ?></label>
-            <input class="widefat upload_image" id="<?php echo $this->get_field_id('background_image'); ?>"
-                name="<?php echo $this->get_field_name('background_image'); ?>" type="text"
-                value="<?php echo $background_image; ?>">
-            <button class="button select-image-button"><?php esc_html_e('Upload Image', 'xroof-core'); ?></button>
+            <label for="<?php echo esc_attr($this->get_field_id('background_image')); ?>">
+                <?php esc_html_e('Background Image:', 'xroof'); ?>
+            </label>
+            <input class="widefat upload_image" id="<?php echo esc_attr($this->get_field_id('background_image')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('background_image')); ?>" type="text"
+                value="<?php echo esc_url($instance['background_image']); ?>">
+            <button class="button select-image-button"><?php esc_html_e('Upload Image', 'xroof'); ?></button>
         </p>
 
         <script>
@@ -428,8 +448,8 @@ class Xroof_Appointment_Card_Widget extends WP_Widget
                     let button = $(this);
                     let input = button.prev('.upload_image');
                     let frame = wp.media({
-                        title: 'Select or Upload Image',
-                        button: { text: 'Use this image' },
+                        title: '<?php esc_html_e('Select or Upload Image', 'xroof'); ?>',
+                        button: { text: '<?php esc_html_e('Use this image', 'xroof'); ?>' },
                         multiple: false
                     });
                     frame.on('select', function () {
@@ -446,13 +466,12 @@ class Xroof_Appointment_Card_Widget extends WP_Widget
     public function update($new_instance, $old_instance)
     {
         $instance = [];
-        $instance['background_image'] = (!empty($new_instance['background_image'])) ? esc_url_raw($new_instance['background_image']) : '';
-        $instance['heading'] = (!empty($new_instance['heading'])) ? sanitize_text_field($new_instance['heading']) : '';
-        $instance['description'] = (!empty($new_instance['description'])) ? sanitize_textarea_field($new_instance['description']) : '';
-        $instance['button_text'] = (!empty($new_instance['button_text'])) ? sanitize_text_field($new_instance['button_text']) : '';
-        $instance['button_url'] = (!empty($new_instance['button_url'])) ? esc_url_raw($new_instance['button_url']) : '';
-        $instance['phone_number'] = (!empty($new_instance['phone_number'])) ? sanitize_text_field($new_instance['phone_number']) : '';
-
+        $instance['background_image'] = !empty($new_instance['background_image']) ? esc_url_raw($new_instance['background_image']) : '';
+        $instance['heading'] = !empty($new_instance['heading']) ? sanitize_text_field($new_instance['heading']) : '';
+        $instance['description'] = !empty($new_instance['description']) ? sanitize_textarea_field($new_instance['description']) : '';
+        $instance['button_text'] = !empty($new_instance['button_text']) ? sanitize_text_field($new_instance['button_text']) : '';
+        $instance['button_url'] = !empty($new_instance['button_url']) ? esc_url_raw($new_instance['button_url']) : '';
+        $instance['phone_number'] = !empty($new_instance['phone_number']) ? sanitize_text_field($new_instance['phone_number']) : '';
         return $instance;
     }
 }
@@ -464,18 +483,18 @@ class Xroof_Info_Widget extends WP_Widget
     {
         parent::__construct(
             'xroof_info_widget',
-            __('Xroof: More Information', 'xroof-core'),
-            array('description' => __('Displays customizable business hours or info list.', 'xroof-core'))
+            __('Xroof: More Information', 'xroof'),
+            array('description' => __('Displays customizable business hours or info list.', 'xroof'))
         );
     }
 
     public function widget($args, $instance)
     {
-        $title = !empty($instance['title']) ? $instance['title'] : __('More Information :', 'xroof-core');
+        $title = !empty($instance['title']) ? $instance['title'] : __('More Information :', 'xroof');
         $items_text = !empty($instance['items']) ? $instance['items'] : '';
         $items = array_filter(array_map('trim', explode("\n", $items_text)));
 
-        echo $args['before_widget'];
+        echo xroof_kses($args['before_widget']);
         ?>
         <div class="sidebar__services mt-6 mt-xl-8 py-6 py-xl-8">
             <?php if (!empty($title)): ?>
@@ -493,18 +512,18 @@ class Xroof_Info_Widget extends WP_Widget
             <?php endif; ?>
         </div>
         <?php
-        echo $args['after_widget'];
+        echo xroof_kses($args['after_widget']);
     }
 
     public function form($instance)
     {
-        $title = !empty($instance['title']) ? $instance['title'] : __('More Information :', 'xroof-core');
+        $title = !empty($instance['title']) ? $instance['title'] : __('More Information :', 'xroof');
         $items = !empty($instance['items']) ? $instance['items'] : "Monday : 10.00 AM - 4.00 PM\nTuesday : 10.00 AM - 4.00 PM\nWednesday : 10.00 AM - 4.00 PM\nThursday : 10.00 AM - 4.00 PM\nFriday : Close";
         ?>
 
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo esc_html__('Title:', 'xroof-core'); ?>
+                <?php echo esc_html__('Title:', 'xroof'); ?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
@@ -513,12 +532,12 @@ class Xroof_Info_Widget extends WP_Widget
 
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('items')); ?>">
-                <?php echo esc_html__('Items:', 'xroof-core'); ?>
+                <?php echo esc_html__('Items:', 'xroof'); ?>
             </label>
             <textarea class="widefat" rows="8" id="<?php echo esc_attr($this->get_field_id('items')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('items')); ?>"><?php echo esc_textarea($items); ?></textarea>
             <small style="color:#666; display:block; margin-top:4px;">
-                <?php echo esc_html__('👉 For new item, press Enter on a new line.', 'xroof-core'); ?>
+                <?php echo esc_html__('👉 For new item, press Enter on a new line.', 'xroof'); ?>
             </small>
         </p>
         <?php
@@ -540,8 +559,8 @@ class Xroof_Project_Details_Widget extends WP_Widget
     {
         parent::__construct(
             'xroof_project_details_widget',
-            __('Xroof: Project Details', 'xroof-core'),
-            ['description' => __('Displays ACF project details such as client, start/end date, address, and rating.', 'xroof-core')]
+            __('Xroof: Project Details', 'xroof'),
+            ['description' => __('Displays ACF project details such as client, start/end date, address, and rating.', 'xroof')]
         );
     }
 
@@ -563,12 +582,12 @@ class Xroof_Project_Details_Widget extends WP_Widget
             return;
         }
 
-        echo $args['before_widget'];
+        echo xroof_kses($args['before_widget']);
         ?>
 
         <div class="sidebar__project-details mb-6 mb-xl-8">
             <h2 class="sidebar__title pb-6 pb-xl-8">
-                <?php echo esc_html__('Project details :', 'xroof-core'); ?>
+                <?php echo esc_html__('Project details :', 'xroof'); ?>
             </h2>
 
             <ul class="project-details mt-6 mt-xl-8">
@@ -576,7 +595,7 @@ class Xroof_Project_Details_Widget extends WP_Widget
                 <?php if (!empty($client_name)): ?>
                     <li class="project-details__item">
                         <div class="project-details__group">
-                            <span class="project-details__label"><?php echo esc_html__('Client', 'xroof-core'); ?></span>
+                            <span class="project-details__label"><?php echo esc_html__('Client', 'xroof'); ?></span>
                             <span class="project-details__separator">:</span>
                         </div>
                         <span class="project-details__value"><?php echo esc_html($client_name); ?></span>
@@ -586,7 +605,7 @@ class Xroof_Project_Details_Widget extends WP_Widget
                 <?php if (!empty($start_date)): ?>
                     <li class="project-details__item">
                         <div class="project-details__group">
-                            <span class="project-details__label"><?php echo esc_html__('Start', 'xroof-core'); ?></span>
+                            <span class="project-details__label"><?php echo esc_html__('Start', 'xroof'); ?></span>
                             <span class="project-details__separator">:</span>
                         </div>
                         <span class="project-details__value"><?php echo esc_html($start_date); ?></span>
@@ -596,7 +615,7 @@ class Xroof_Project_Details_Widget extends WP_Widget
                 <?php if (!empty($end_date)): ?>
                     <li class="project-details__item">
                         <div class="project-details__group">
-                            <span class="project-details__label"><?php echo esc_html__('End', 'xroof-core'); ?></span>
+                            <span class="project-details__label"><?php echo esc_html__('End', 'xroof'); ?></span>
                             <span class="project-details__separator">:</span>
                         </div>
                         <span class="project-details__value"><?php echo esc_html($end_date); ?></span>
@@ -606,7 +625,7 @@ class Xroof_Project_Details_Widget extends WP_Widget
                 <?php if (!empty($address)): ?>
                     <li class="project-details__item">
                         <div class="project-details__group">
-                            <span class="project-details__label"><?php echo esc_html__('Address', 'xroof-core'); ?></span>
+                            <span class="project-details__label"><?php echo esc_html__('Address', 'xroof'); ?></span>
                             <span class="project-details__separator">:</span>
                         </div>
                         <span class="project-details__value"><?php echo esc_html($address); ?></span>
@@ -616,7 +635,7 @@ class Xroof_Project_Details_Widget extends WP_Widget
                 <?php if (!empty($rating)): ?>
                     <li class="project-details__item">
                         <div class="project-details__group">
-                            <span class="project-details__label"><?php echo esc_html__('Rating', 'xroof-core'); ?></span>
+                            <span class="project-details__label"><?php echo esc_html__('Rating', 'xroof'); ?></span>
                             <span class="project-details__separator">:</span>
                         </div>
                         <?php
@@ -635,19 +654,19 @@ class Xroof_Project_Details_Widget extends WP_Widget
         </div>
 
         <?php
-        echo $args['after_widget'];
+        echo xroof_kses($args['after_widget']);
     }
 
     public function form($instance)
     {
         ?>
         <p style="color:#555;">
-            <?php echo esc_html__('This widget automatically pulls data from ACF fields:', 'xroof-core'); ?><br>
+            <?php echo esc_html__('This widget automatically pulls data from ACF fields:', 'xroof'); ?><br>
             <code>project-client-name</code>, <code>project_start_date</code>, <code>project_end_date</code>,
             <code>project_address</code>, <code>project_rating</code>
         </p>
         <p style="color:#888;">
-            <?php echo esc_html__('Note: This widget will only work if Advanced Custom Fields (ACF) is active and the fields contain data.', 'xroof-core'); ?>
+            <?php echo esc_html__('Note: This widget will only work if Advanced Custom Fields (ACF) is active and the fields contain data.', 'xroof'); ?>
         </p>
         <?php
     }
@@ -659,48 +678,51 @@ class Xroof_Project_Details_Widget extends WP_Widget
 }
 
 //  Xroof Photo Gallery Widget
-class Xroof_Photo_Gallery_Widget extends WP_Widget {
+class Xroof_Photo_Gallery_Widget extends WP_Widget
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct(
             'xroof_photo_gallery',
-            esc_html__('Xroof: Photo Gallery', 'xroof-core'),
-            ['description' => esc_html__('Display a photo gallery with selected images.', 'xroof-core')]
+            esc_html__('Xroof: Photo Gallery', 'xroof'),
+            ['description' => esc_html__('Display a photo gallery with selected images.', 'xroof')]
         );
         add_action('admin_enqueue_scripts', array($this, 'enqueue_media_script'));
     }
 
-    public function enqueue_media_script($hook) {
+    public function enqueue_media_script($hook)
+    {
         if ('widgets.php' === $hook || (isset($_GET['customize_autosaved']) && 'true' === $_GET['customize_autosaved'])) {
             wp_enqueue_media();
         }
     }
 
-    public function widget($args, $instance) {
-        $title  = !empty($instance['title']) ? $instance['title'] : esc_html__('Photo Gallery', 'xroof-core');
+    public function widget($args, $instance)
+    {
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Photo Gallery', 'xroof');
         $images = !empty($instance['images']) ? $instance['images'] : [];
 
         if (empty($images)) {
             return;
         }
 
-        echo $args['before_widget']; ?>
+        echo xroof_kses($args['before_widget']); ?>
 
         <div class="sidebar__gallery mt-6 mt-xl-8">
             <h3 class="sidebar__subtitle mb-4 mb-xl-8"><?php echo esc_html($title); ?></h3>
 
             <div class="gallery">
-                <?php foreach ($images as $image_id) :
-                    $img_url   = wp_get_attachment_image_url($image_id, 'large');
-                    $img_alt   = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                <?php foreach ($images as $image_id):
+                    $img_url = wp_get_attachment_image_url($image_id, 'large');
+                    $img_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                     $img_title = get_the_title($image_id);
 
                     if ($img_url): ?>
                         <div class="gallery__item">
                             <div class="gallery__img-wrap">
                                 <img src="<?php echo esc_url($img_url); ?>"
-                                    alt="<?php echo esc_attr($img_alt ? $img_alt : $img_title); ?>"
-                                    class="gallery__img">
+                                    alt="<?php echo esc_attr($img_alt ? $img_alt : $img_title); ?>" class="gallery__img">
                             </div>
                         </div>
                     <?php endif;
@@ -709,67 +731,63 @@ class Xroof_Photo_Gallery_Widget extends WP_Widget {
         </div>
 
         <?php
-        echo $args['after_widget'];
+        echo xroof_kses($args['after_widget']);
     }
 
-    public function form($instance) {
-        $title  = isset($instance['title']) ? esc_attr($instance['title']) : esc_html__('Photo Gallery', 'xroof-core');
+    public function form($instance)
+    {
+        $title = isset($instance['title']) ? esc_attr($instance['title']) : esc_html__('Photo Gallery', 'xroof');
         $images = isset($instance['images']) ? $instance['images'] : [];
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php esc_html_e('Title:', 'xroof-core'); ?>
+                <?php esc_html_e('Title:', 'xroof'); ?>
             </label>
-            <input class="widefat"
-                   id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                   name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                   type="text"
-                   value="<?php echo esc_attr($title); ?>">
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
+                value="<?php echo esc_attr($title); ?>">
         </p>
 
         <p>
-            <label><?php esc_html_e('Select Images:', 'xroof-core'); ?></label>
-            
+            <label><?php esc_html_e('Select Images:', 'xroof'); ?></label>
+
             <br><small style="font-size: 11px; color: #888; font-style: italic;">Image size will be 110x100.</small>
 
-            <input type="hidden"
-                   id="<?php echo esc_attr($this->get_field_id('images')); ?>"
-                   name="<?php echo esc_attr($this->get_field_name('images')); ?>"
-                   value="<?php echo esc_attr(implode(',', (array)$images)); ?>"
-                   class="xroof-gallery-ids-field">
+            <input type="hidden" id="<?php echo esc_attr($this->get_field_id('images')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('images')); ?>"
+                value="<?php echo esc_attr(implode(',', (array) $images)); ?>" class="xroof-gallery-ids-field">
 
             <button type="button" class="button select-xroof-gallery-images"
-                    data-target-input="#<?php echo esc_attr($this->get_field_id('images')); ?>"
-                    data-target-preview="#<?php echo esc_attr($this->get_field_id('images')); ?>-preview-ul">
-                <?php esc_html_e('Select Images', 'xroof-core'); ?>
+                data-target-input="#<?php echo esc_attr($this->get_field_id('images')); ?>"
+                data-target-preview="#<?php echo esc_attr($this->get_field_id('images')); ?>-preview-ul">
+                <?php esc_html_e('Select Images', 'xroof'); ?>
             </button>
 
-            <ul class="xroof-gallery-preview"
-                id="<?php echo esc_attr($this->get_field_id('images')); ?>-preview-ul"
-                style="margin-top:10px;">
-                <?php
-                if (!empty($images)) {
-                    foreach ($images as $image_id) {
-                        $thumb = wp_get_attachment_image_url($image_id, 'thumbnail');
-                        if ($thumb) {
-                            echo '<li style="display:inline-block;margin-right:5px;">
+        <ul class="xroof-gallery-preview" id="<?php echo esc_attr($this->get_field_id('images')); ?>-preview-ul"
+            style="margin-top:10px;">
+            <?php
+            if (!empty($images)) {
+                foreach ($images as $image_id) {
+                    $thumb = wp_get_attachment_image_url($image_id, 'thumbnail');
+                    if ($thumb) {
+                        echo '<li style="display:inline-block;margin-right:5px;">
                                     <img src="' . esc_url($thumb) . '" width="60" height="60" style="border-radius:4px;">
                                 </li>';
-                        }
                     }
                 }
-                ?>
-            </ul>
+            }
+            ?>
+        </ul>
         </p>
 
         <script>
-            (function() {
+            (function () {
                 function setupGalleryUploader(targetElement) {
                     if (targetElement.classList.contains('select-xroof-gallery-images')) {
                         const button = targetElement;
                         const inputId = button.getAttribute('data-target-input');
                         const previewId = button.getAttribute('data-target-preview');
-                        
+
                         const input = document.querySelector(inputId);
                         const preview = document.querySelector(previewId);
 
@@ -779,35 +797,35 @@ class Xroof_Photo_Gallery_Widget extends WP_Widget {
                         }
 
                         const mediaUploader = wp.media({
-                            title: '<?php echo esc_js(esc_html__('Select Images', 'xroof-core')); ?>',
-                            button: {text: '<?php echo esc_js(esc_html__('Use these images', 'xroof-core')); ?>'},
+                            title: '<?php echo esc_js(esc_html__('Select Images', 'xroof')); ?>',
+                            button: { text: '<?php echo esc_js(esc_html__('Use these images', 'xroof')); ?>' },
                             multiple: true
                         });
 
                         mediaUploader.on('select', function () {
                             const attachments = mediaUploader.state().get('selection').toJSON();
                             const ids = attachments.map(att => att.id);
-                            
+
                             input.value = ids.join(',');
 
                             preview.innerHTML = '';
                             attachments.forEach(att => {
                                 const thumb = att.sizes && att.sizes.thumbnail ? att.sizes.thumbnail.url : att.url;
-                                
+
                                 const listItem = document.createElement('li');
                                 listItem.style.display = 'inline-block';
                                 listItem.style.marginRight = '5px';
-                                
+
                                 const img = document.createElement('img');
                                 img.src = thumb;
                                 img.width = 60;
                                 img.height = 60;
                                 img.style.borderRadius = '4px';
-                                
+
                                 listItem.appendChild(img);
                                 preview.appendChild(listItem);
                             });
-                            
+
                             mediaUploader.close();
                             input.dispatchEvent(new Event('change', { bubbles: true }));
                         });
@@ -817,16 +835,16 @@ class Xroof_Photo_Gallery_Widget extends WP_Widget {
                 }
 
                 if (window.jQuery) {
-                    window.jQuery(document).on('click', '.select-xroof-gallery-images', function(e) {
-                         e.preventDefault();
-                         setupGalleryUploader(this);
+                    window.jQuery(document).on('click', '.select-xroof-gallery-images', function (e) {
+                        e.preventDefault();
+                        setupGalleryUploader(this);
                     });
                 } else {
-                    document.addEventListener('click', function(e) {
-                         if (e.target && e.target.classList.contains('select-xroof-gallery-images')) {
-                             e.preventDefault();
-                             setupGalleryUploader(e.target);
-                         }
+                    document.addEventListener('click', function (e) {
+                        if (e.target && e.target.classList.contains('select-xroof-gallery-images')) {
+                            e.preventDefault();
+                            setupGalleryUploader(e.target);
+                        }
                     });
                 }
             })();
@@ -834,14 +852,15 @@ class Xroof_Photo_Gallery_Widget extends WP_Widget {
         <?php
     }
 
-    public function update($new_instance, $old_instance) {
+    public function update($new_instance, $old_instance)
+    {
         $instance = [];
-        $instance['title']  = !empty($new_instance['title']) ? sanitize_text_field($new_instance['title']) : '';
+        $instance['title'] = !empty($new_instance['title']) ? sanitize_text_field($new_instance['title']) : '';
         $instance['images'] = !empty($new_instance['images']) ? array_map('absint', explode(',', $new_instance['images'])) : [];
         return $instance;
     }
 }
- 
+
 function xroof_register_widgets()
 {
     register_widget('Xroof_Newsletter_Widget');

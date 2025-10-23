@@ -3,6 +3,14 @@
 
 function xroof_theme_support()
 {
+    /**
+     * Make theme available for translation.
+     * Translations can be filed in the /languages/ directory.
+     * If you're building a theme based on xroof, use a find and replace
+     * to change 'xroof' to the name of your theme in all the template files.
+     */
+    load_theme_textdomain('xroof', get_template_directory() . '/languages');
+
     add_theme_support('post-thumbnails');
     add_theme_support('automatic-feed-links');
     add_theme_support('title-tag');
@@ -25,8 +33,6 @@ function xroof_theme_support()
 
     register_nav_menus(array(
         'main-menu' => __('Main Menu', 'xroof'),
-        'menu-two' => __('Menu two', 'xroof'),
-        'menu-three' => __('Menu three', 'xroof'),
     ));
 
     remove_theme_support('widgets-block-editor');
@@ -112,6 +118,7 @@ function xroof_register_footer_widgets()
     ]);
 
 }
+
 add_action('widgets_init', 'xroof_register_footer_widgets');
 
 // Clean up Contact Form 7 output (remove <span>, <p>, <br>)
@@ -129,6 +136,8 @@ include_once('inc/template-function.php');
 include_once('inc/nav-walker.php');
 include_once('inc/widgets.php');
 include_once('inc/breadcrumb.php');
+include_once('inc/class-tgm-plugin-activation.php');
+include_once('inc/add_plugin.php');
 if (class_exists('kirki')) {
     include_once('inc/xroof-kirki.php');
 }

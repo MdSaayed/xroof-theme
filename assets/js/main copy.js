@@ -905,6 +905,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+(function ($) {
+  $(window).on('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/xroof-award.default',
+      function () {
+        const awardItems = document.querySelectorAll('.award__item');
+        if (awardItems.length) {
+          awardItems.forEach(item => {
+            item.addEventListener('click', () => {
+              awardItems.forEach(el => el.classList.remove('award__item--active'));
+              item.classList.add('award__item--active');
+            });
+          });
+        }
+      }
+    );
+  });
+})(jQuery);
+
+
+(function ($) {
+  $(window).on('elementor/frontend/init', function () {
+
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/faq_widget.default',
+      function ($scope) {
+        const faqItems = $scope[0].querySelectorAll('.faq__item');
+
+        if (faqItems.length) {
+          faqItems.forEach(item => {
+            const button = item.querySelector('.faq__question-wrap');
+            const answer = item.querySelector('.faq__answer');
+
+            // Attach click listener to the question wrapper
+            if (button) {
+              button.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all FAQ items within this widget instance
+                $scope[0].querySelectorAll('.faq__item').forEach(i => {
+                  i.classList.remove('active');
+                  const otherAnswer = i.querySelector('.faq__answer');
+                  if (otherAnswer) {
+                    otherAnswer.style.height = '0px'; // Close with 0 height
+                  }
+                });
+
+                // Open the clicked item
+                if (!isActive) {
+                  item.classList.add('active');
+                  // Set height using scrollHeight for smooth transition/animation
+                  if (answer) {
+                    // Set a timeout to ensure the browser has processed the 'remove active' class before calculating scrollHeight
+                    // In most cases, scrollHeight will be correct immediately.
+                    answer.style.height = answer.scrollHeight + 20 + 'px';
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+    );
+  });
+})(jQuery);
+
+
+
+
+
+
+
+
+
+
 
 
 

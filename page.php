@@ -10,7 +10,7 @@
                     <?php the_content(); ?>
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="text-center"><?php _e('No Page Content To Display.'); ?></p>
+                <p class="text-center"><?php _e('No Page Content To Display.','xroof'); ?></p>
             <?php endif; ?>
         </div>
     </div>

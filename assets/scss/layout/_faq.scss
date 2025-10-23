@@ -18,7 +18,7 @@
 
     &__item {
         height: auto !important;
-        opacity: 0;
+        opacity: 1;
         transform: translateY(80px);
         transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
     }

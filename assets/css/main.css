@@ -19061,7 +19061,7 @@ SCSS INDEX
 }
 .faq__item {
   height: auto !important;
-  opacity: 0;
+  opacity: 1;
   -webkit-transform: translateY(80px);
           transform: translateY(80px);
   -webkit-transition: background 0.3s, -webkit-transform 0.3s, -webkit-box-shadow 0.3s;
