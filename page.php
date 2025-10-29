@@ -7,7 +7,7 @@
             <?php if (have_posts()): ?>
                 <?php while (have_posts()):
                     the_post(); ?>
-                    <?php the_content(); ?>
+                    <?php get_template_part('template-parts/content', 'page'); ?>
                 <?php endwhile; ?>
             <?php else: ?>
                 <p class="text-center"><?php _e('No Page Content To Display.','xroof'); ?></p>

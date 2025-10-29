@@ -130,11 +130,26 @@ add_filter('wpcf7_form_elements', function ($content) {
     return $content;
 });
 
+add_filter('mc4wp_form_content', function ($content) {
+
+    $custom_form = '
+    <div class="footer__newsletter-form-group d-flex w-100">
+        <input type="email" name="EMAIL" class="newsletter-form form-control" placeholder="Your email address" required>
+        <button type="submit" class="newsletter-form-btn" aria-label="Submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 11 8" aria-hidden="true">
+                <path d="M9.887 3.655c.19.19.19.499 0 .69L6.783 7.449a.437.437 0 0 1-.69 0 .487.487 0 0 1 0-.69L8.853 4 6.093 1.241a.487.487 0 0 1 0-.69.437.437 0 0 1 .69 0L9.887 3.655ZM9.542 4v.488H.458V3.512h9.084V4Z" fill="#EE212B"/>
+            </svg>
+        </button>
+    </div>';
+
+    return $custom_form;
+});
+
+
 // Inludes File
 include_once('inc/common/scripts.php');
 include_once('inc/template-function.php');
 include_once('inc/nav-walker.php');
-include_once('inc/widgets.php');
 include_once('inc/breadcrumb.php');
 include_once('inc/class-tgm-plugin-activation.php');
 include_once('inc/add_plugin.php');

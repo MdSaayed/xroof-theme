@@ -66,7 +66,7 @@ function xroof_bg_set() {
   }
 }
 xroof_bg_set();
- 
+
 /* =============================
 * 3. Hero Bg Slider Home Two
 ============================= */
@@ -883,7 +883,25 @@ function xroof_blog_gallery_slider() {
 /* =============================
 * 19. Elementor frontend View
 ============================= */
+document.addEventListener('DOMContentLoaded', function () {
+  var shareLinks = document.querySelectorAll('.popup-share');
+  shareLinks.forEach(function (link) {
+    link.removeAttribute('target');
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var url = this.href;
+      var width = 600;
+      var height = 400;
+      var left = (screen.width / 2) - (width / 2);
+      var top = (screen.height / 2) - (height / 2);
+      window.open(url, 'ShareWindow', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+    });
+  });
+});
 
+/* =============================
+* 19. Elementor frontend View
+============================= */
 window.addEventListener("elementor/frontend/init", function () {
   if (typeof elementorFrontend !== "undefined") {
     elementorFrontend.hooks.addAction(
@@ -946,3 +964,5 @@ window.addEventListener("elementor/frontend/init", function () {
     );
   }
 });
+
+

@@ -10,22 +10,24 @@ $post_format_url = function_exists('get_field') ? get_field('post_format_url') :
             <div class="row g-4 g-xl-5">
                 <div class="col-lg-8">
                     <article id="post-<?php the_ID(); ?>" <?php post_class('blog-details__content'); ?>>
-                        <div class="blog-details__thumbnail-wrap position-relative">
-                            <?php if ($post_format_thumbnail): ?>
-                                <img src="<?php echo esc_url($post_format_thumbnail); ?>"
-                                    alt="<?php echo esc_attr(get_the_title()); ?>" class="blog-details__details-thumb">
+                        <?php if (has_post_thumbnail() || $post_format_thumbnail): ?>
+                            <div class="blog-details__thumbnail-wrap position-relative">
+                                <?php if ($post_format_thumbnail): ?>
+                                    <img src="<?php echo esc_url($post_format_thumbnail); ?>"
+                                        alt="<?php echo esc_attr(get_the_title()); ?>" class="blog-details__details-thumb">
 
-                            <?php elseif (has_post_thumbnail()): ?>
-                                <?php the_post_thumbnail('full', [
-                                    'class' => 'blog-details__details-thumb',
-                                    'alt' => esc_attr(get_the_title()),
-                                ]); ?>
-                            <?php endif; ?>
+                                <?php elseif (has_post_thumbnail()): ?>
+                                    <?php the_post_thumbnail('full', [
+                                        'class' => 'blog-details__details-thumb',
+                                        'alt' => esc_attr(get_the_title()),
+                                    ]); ?>
+                                <?php endif; ?>
 
-                            <?php if (!empty($post_format_url)) {
-                                echo get_template_part('template-parts/blog-part/audio-icon');
-                            } ?>
-                        </div>
+                                <?php if (!empty($post_format_url)) {
+                                    echo get_template_part('template-parts/blog-part/audio-icon');
+                                } ?>
+                            </div>
+                        <?php endif ?>
 
                         <h2 class="blog-details__highlight-title my-4"> <?php the_title(); ?></h2>
                         <?php the_content(); ?>
@@ -35,7 +37,12 @@ $post_format_url = function_exists('get_field') ? get_field('post_format_url') :
                             <?php xroof_blog_share(); ?>
                         </div>
                     </article>
+
+                    <div class="blog-details__comments mt-10 mt-xl-15 mt-xxl-20">
+                        <?php comments_template(); ?>
+                    </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="sidebar sidebar--right">
                         <?php get_sidebar(); ?>

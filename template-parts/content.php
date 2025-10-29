@@ -21,6 +21,10 @@
                             <?php xroof_blog_share(); ?>
                         </div>
                     </article>
+                    
+                    <div class="blog-details__comments mt-10 mt-xl-15 mt-xxl-20">
+                        <?php comments_template(); ?>
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar sidebar--right">
@@ -44,7 +48,9 @@
                 </div>
             <?php endif; ?>
 
-            <?php echo get_template_part('template-parts/blog-part/badge') ?>
+            <?php if (has_post_thumbnail()): ?>
+                <?php echo get_template_part('template-parts/blog-part/badge') ?>
+            <?php endif; ?>
         </div>
 
         <div class="blog-card__body">

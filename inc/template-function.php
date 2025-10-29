@@ -297,25 +297,7 @@ function xroof_blog_share()
             </svg>
         </a>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var shareLinks = document.querySelectorAll('.popup-share');
-            shareLinks.forEach(function (link) {
-                link.removeAttribute('target');
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var url = this.href;
-                    var width = 600;
-                    var height = 400;
-                    var left = (screen.width / 2) - (width / 2);
-                    var top = (screen.height / 2) - (height / 2);
-                    window.open(url, 'ShareWindow', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-                });
-            });
-        });
-    </script>
-
+    
     <?php
 }
 
@@ -360,5 +342,7 @@ function xroof_get_menus()
 
     return $options;
 }
+
+
 
 

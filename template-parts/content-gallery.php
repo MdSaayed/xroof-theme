@@ -33,6 +33,10 @@ $post_format_gallery = function_exists('get_field') ? get_field('post_format_gal
                             <?php xroof_blog_share(); ?>
                         </div>
                     </article>
+
+                    <div class="blog-details__comments mt-10 mt-xl-15 mt-xxl-20">
+                        <?php comments_template(); ?>
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar sidebar--right">

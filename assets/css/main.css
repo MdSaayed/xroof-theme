@@ -17769,7 +17769,7 @@ SCSS INDEX
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: unset;
   -webkit-transition: width 0.4s ease, -webkit-flex-basis 0.4s ease;
   transition: width 0.4s ease, -webkit-flex-basis 0.4s ease;
   transition: flex-basis 0.4s ease, width 0.4s ease;
@@ -18191,6 +18191,21 @@ SCSS INDEX
   .achievement__home-icon {
     display: none;
   }
+}
+.achievement--style-1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 247, 247, 0.6);
+  z-index: 1;
+}
+.achievement__container {
+  padding-left: 240px;
+  padding-right: 240px;
+  padding-top: 112px;
+  position: relative;
+  padding-bottom: 112px;
+  z-index: 999;
 }
 
 /* 8. Team Area */
@@ -21457,6 +21472,11 @@ SCSS INDEX
     padding: 12px 20px;
   }
 }
+.contact--style-2 .wpcf7 form .wpcf7-response-output {
+  margin: 0;
+  padding: 0.2em 1em;
+  border: 2px solid #EE212B;
+}
 
 /* 20. Services Details Area */
 /*------------------------------------------------------------------
@@ -22134,6 +22154,8 @@ SCSS INDEX
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 0;
 }
 .breadcrumbs__item {

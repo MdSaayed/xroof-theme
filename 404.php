@@ -8,11 +8,11 @@
             <h2 class="error__subtitle title-xl mt-4 mt-xl-8 mb-4">Oops! Page not found</h2>
             <p class="error__text body-text mb-10 mb-xl-15 mb-xx-20">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                luctus nec ullamcorper mattis, pulvinar
+                luctus nec ullamcorper mattis, pulvinar 
             </p>
 
             <div class="error__btn-wrap d-flex justify-content-center">
-                <a href="<?php esc_url(get_template_directory_uri()); ?>" class="error__btn btn-icon-right-primary">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="error__btn btn-icon-right-primary">
                     Back To Home
                     <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
                         <path
