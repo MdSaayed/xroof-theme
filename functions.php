@@ -1,6 +1,5 @@
 <?php
 
-
 function xroof_theme_support()
 {
     /**
@@ -48,7 +47,7 @@ function xroof_register_footer_widgets()
         'description' => esc_html__('Widgets in this area will be shown on the Blog Details page.', 'xroof'),
         'before_widget' => '<div id="%1$s" class="widget blog__sidebar %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h5 class="sidebar__title mb-4">',
+        'before_title' => '<h5 class="sidebar__title">',
         'after_title' => '</h5>',
     ]);
 
@@ -59,7 +58,7 @@ function xroof_register_footer_widgets()
         'description' => esc_html__('Widgets in this area will be shown on the Services Details page.', 'xroof'),
         'before_widget' => '<div id="%1$s" class="widget sidebar sidebar--left %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h5 class="sidebar__title mb-4">',
+        'before_title' => '<h5 class="sidebar__title">',
         'after_title' => '</h5>',
     ]);
     // Project Details Sidebar
@@ -121,7 +120,6 @@ function xroof_register_footer_widgets()
 
 add_action('widgets_init', 'xroof_register_footer_widgets');
 
-// Clean up Contact Form 7 output (remove <span>, <p>, <br>)
 add_filter('wpcf7_form_elements', function ($content) {
     $content = preg_replace('/<(span|p)[^>]*>/', '', $content);
     $content = preg_replace('/<\/(span|p)>/', '', $content);

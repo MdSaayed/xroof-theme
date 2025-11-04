@@ -74,6 +74,15 @@
 
     &__newsletter {
         max-width: 340px;
+
+        .mc4wp-success p {
+            color: $color-white;
+            margin-top: 10px;
+        }
+        .mc4wp-alert.mc4wp-error p {
+            color: $color-primary;
+            margin-top: 10px;
+        } 
     }
 
     &__desc-small {
@@ -101,9 +110,12 @@
         color: $color-white;
     }
 
+    &__hours li {
+        color: $color-white;
+    }
+
     &__links li a,
     &__nav-link,
-    &__hour,
     &__newsletter-text {
         color: $color-white;
     }
@@ -240,7 +252,7 @@
             }
 
             &__nav-link li a:hover,
-            &__nav li a:hover  {
+            &__nav li a:hover {
                 color: $color-primary;
             }
 

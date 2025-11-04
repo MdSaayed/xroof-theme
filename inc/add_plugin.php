@@ -77,6 +77,11 @@ function xroof_register_required_plugins() {
             'slug'         => 'header-footer-elementor',
             'required'     => true,
         ],
+        [
+            'name'         => esc_html__( 'MC4WP: Mailchimp for WordPress', 'xroof' ),
+            'slug'         => 'mailchimp-for-wp',
+            'required'     => true,
+        ],
 
 
     ];

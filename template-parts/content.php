@@ -21,7 +21,7 @@
                             <?php xroof_blog_share(); ?>
                         </div>
                     </article>
-                    
+
                     <div class="blog-details__comments mt-10 mt-xl-15 mt-xxl-20">
                         <?php comments_template(); ?>
                     </div>
@@ -36,8 +36,8 @@
     </article>
 <?php else: ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class('blog-card d-flex flex-column h-100'); ?>>
-        <div class="blog-card__header">
-            <?php if (has_post_thumbnail()): ?>
+        <?php if (has_post_thumbnail()): ?>
+            <div class="blog-card__header">
                 <div class="blog-card__image-wrap">
                     <a href="<?php echo esc_url(get_permalink()); ?>">
                         <?php the_post_thumbnail(
@@ -46,12 +46,11 @@
                         ); ?>
                     </a>
                 </div>
-            <?php endif; ?>
 
-            <?php if (has_post_thumbnail()): ?>
                 <?php echo get_template_part('template-parts/blog-part/badge') ?>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
+
 
         <div class="blog-card__body">
             <?php if (get_the_title()): ?>

@@ -259,45 +259,40 @@ function xroof_navigation()
     }
 }
 
-function xroof_blog_share()
-{
-    $post_url = urlencode(get_permalink());
-    $post_title = urlencode(get_the_title());
+function xroof_blog_share() {
+    $post_url   = get_permalink();
+    $post_title = get_the_title();
     ?>
 
     <div class="blog-details__share-links">
 
         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($post_url); ?>"
-            class="blog-details__share-link popup-share">
+            class="blog-details__share-link popup-share" target="_blank" rel="noopener">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <path
-                    d="M14.92 25.4753V14.1681H18.7138L19.283 9.76021H14.92V6.94641C14.92 5.67061 15.2728 4.80118 17.1043 4.80118L19.4365 4.80022V0.857636C19.0332 0.805223 17.6488 0.685059 16.0374 0.685059C12.6726 0.685059 10.369 2.73888 10.369 6.50985V9.76021H6.56372V14.1681H10.369V25.4753H14.92Z"
-                    fill="white" />
+                <path d="M14.92 25.4753V14.1681H18.7138L19.283 9.76021H14.92V6.94641C14.92 5.67061 15.2728 4.80118 17.1043 4.80118L19.4365 4.80022V0.857636C19.0332 0.805223 17.6488 0.685059 16.0374 0.685059C12.6726 0.685059 10.369 2.73888 10.369 6.50985V9.76021H6.56372V14.1681H10.369V25.4753H14.92Z" fill="white"/>
             </svg>
         </a>
 
-        <a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($post_url); ?>&text=<?php echo esc_html($post_title); ?>"
-            class="blog-details__share-link popup-share">
+        <a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($post_url); ?>&text=<?php echo esc_attr($post_title); ?>"
+            class="blog-details__share-link popup-share" target="_blank" rel="noopener">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <path
-                    d="M24.26 6.5a9.31 9.31 0 0 1-2.66.73 4.64 4.64 0 0 0 2.04-2.56 9.27 9.27 0 0 1-2.94 1.13 4.62 4.62 0 0 0-7.87 4.21 13.1 13.1 0 0 1-9.51-4.82 4.62 4.62 0 0 0 1.43 6.17 4.59 4.59 0 0 1-2.09-.58v.06a4.62 4.62 0 0 0 3.7 4.53 4.65 4.65 0 0 1-2.08.08 4.63 4.63 0 0 0 4.32 3.21 9.26 9.26 0 0 1-5.73 1.97 13.05 13.05 0 0 0 7.08 2.07c8.5 0 13.15-7.05 13.15-13.16 0-.2-.01-.39-.02-.58A9.39 9.39 0 0 0 24.26 6.5z"
-                    fill="white" />
+                <path d="M24.26 6.5a9.31 9.31 0 0 1-2.66.73 4.64 4.64 0 0 0 2.04-2.56 9.27 9.27 0 0 1-2.94 1.13 4.62 4.62 0 0 0-7.87 4.21 13.1 13.1 0 0 1-9.51-4.82 4.62 4.62 0 0 0 1.43 6.17 4.59 4.59 0 0 1-2.09-.58v.06a4.62 4.62 0 0 0 3.7 4.53 4.65 4.65 0 0 1-2.08.08 4.63 4.63 0 0 0 4.32 3.21 9.26 9.26 0 0 1-5.73 1.97 13.05 13.05 0 0 0 7.08 2.07c8.5 0 13.15-7.05 13.15-13.16 0-.2-.01-.39-.02-.58A9.39 9.39 0 0 0 24.26 6.5z" fill="white"/>
             </svg>
         </a>
 
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_url($post_url); ?>" target="_blank"
-            class="blog-details__share-link">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_url($post_url); ?>"
+            class="blog-details__share-link" target="_blank" rel="noopener">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 448 512" fill="white">
                 <path d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 
-           0 56.5S24.07 3 53.84 3c29.77 0 53.84 24.07 
-           53.84 53.5S83.61 110 53.84 110zM447.9 448h-92.4V306.4c0-33.7-.7-77.1-47-77.1-47 
-           0-54.2 36.8-54.2 74.8V448h-92.4V148.9h88.7v40.8h1.3c12.4-23.5 
-           42.6-48.2 87.7-48.2 93.8 0 111.2 61.7 
-           111.2 141.9V448z" />
+                0 56.5S24.07 3 53.84 3c29.77 0 53.84 24.07 
+                53.84 53.5S83.61 110 53.84 110zM447.9 448h-92.4V306.4c0-33.7-.7-77.1-47-77.1-47 
+                0-54.2 36.8-54.2 74.8V448h-92.4V148.9h88.7v40.8h1.3c12.4-23.5 
+                42.6-48.2 87.7-48.2 93.8 0 111.2 61.7 
+                111.2 141.9V448z"/>
             </svg>
         </a>
     </div>
-    
+
     <?php
 }
 

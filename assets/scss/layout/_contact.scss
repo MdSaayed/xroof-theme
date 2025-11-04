@@ -342,12 +342,38 @@
                     }
                 }
             }
-        } 
+        }
 
         .wpcf7 form .wpcf7-response-output {
             margin: 0;
             padding: 0.2em 1em;
-            border: 2px solid $color-primary;
+            border: 2px solid #00a0d2;
         }
+
+        .wpcf7-response-output.wpcf7-mail-sent-success {
+            color: #0f5132;
+            background-color: #d1e7dd;
+            border: 1px solid #badbcc;
+        }
+
+        .wpcf7-response-output.wpcf7-validation-errors,
+        .wpcf7-response-output.wpcf7-validation-error {
+            color: #664d03;
+            background-color: #fff3cd;
+            border: 1px solid #ffecb5;
+        }
+
+        .wpcf7-response-output.wpcf7-mail-failed {
+            color: $color-primary;
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+        }
+
+        .wpcf7-response-output.wpcf7-spam-blocked {
+            color: $color-primary;
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+        }
+
     }
 }

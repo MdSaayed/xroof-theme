@@ -32,10 +32,10 @@ $space-properties: (
     .#{$abbr}-#{$i} {
       @if type-of($prop) == 'list' or type-of($prop) == 'tuple' {
         @each $p in $prop {
-          #{$p}: $space;
+          #{$p}: $space !important; // <-- !important add kora hoise
         }
       } @else {
-        #{$prop}: $space; 
+        #{$prop}: $space !important; // <-- !important add kora hoise
       }
     }
   }
@@ -48,10 +48,10 @@ $space-properties: (
           .#{$abbr}-#{$breakpoint}-#{$i} {
             @if type-of($prop) == 'list' or type-of($prop) == 'tuple' {
               @each $p in $prop {
-                #{$p}: $space;
+                #{$p}: $space !important; // <-- !important add kora hoise
               }
             } @else {
-              #{$prop}: $space;
+              #{$prop}: $space !important; // <-- !important add kora hoise
             }
           }
         }

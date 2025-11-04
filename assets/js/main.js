@@ -965,4 +965,100 @@ window.addEventListener("elementor/frontend/init", function () {
   }
 });
 
+/* =============================
+* 19. Dropdown Option
+============================= */
+(function () {
+  function createCustomSelect(select) {
+    if (!select || select.dataset.custom) return;
 
+    select.style.display = 'none';
+
+    // Create wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-select-wrapper';
+
+    // Selected display
+    const selected = document.createElement('div');
+    selected.className = 'custom-select-selected';
+    selected.textContent = select.options[select.selectedIndex]?.text || 'Select';
+    wrapper.appendChild(selected);
+
+    // Dropdown arrow
+    const arrow = document.createElement('span');
+    arrow.className = 'custom-select-arrow';
+    wrapper.appendChild(arrow);
+
+    // Dropdown list
+    const list = document.createElement('div');
+    list.className = 'custom-select-list';
+
+    const items = [];
+
+    Array.from(select.options).forEach((opt, index) => {
+      const item = document.createElement('div');
+      item.className = 'custom-select-item';
+      item.textContent = opt.text;
+
+      // Set active class if initially selected
+      if (select.selectedIndex === index) item.classList.add('active');
+
+      // Click event
+      item.addEventListener('click', () => {
+        selected.textContent = opt.text;
+        select.value = opt.value;
+
+        // Update active class
+        items.forEach((i, idx) => {
+          i.classList.toggle('active', idx === index);
+        });
+
+        // ✅ Trigger native change event (important for WordPress AJAX)
+        const event = new Event('change', { bubbles: true });
+        select.dispatchEvent(event);
+
+        list.style.display = 'none';
+      });
+
+      list.appendChild(item);
+      items.push(item);
+    });
+
+    // Toggle dropdown
+    selected.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = list.style.display === 'block';
+      document.querySelectorAll('.custom-select-list').forEach(l => l.style.display = 'none');
+      list.style.display = isOpen ? 'none' : 'block';
+    });
+
+    select.parentNode.insertBefore(wrapper, select);
+    wrapper.appendChild(list);
+
+    select.dataset.custom = 'true';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('select').forEach(createCustomSelect);
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.custom-select-list').forEach(list => {
+      if (!list.parentNode.contains(e.target)) {
+        list.style.display = 'none';
+      }
+    });
+  });
+
+  // Watch for dynamically added selects
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(node => {
+        if (node.tagName === 'SELECT') createCustomSelect(node);
+        if (node.querySelectorAll) node.querySelectorAll('select').forEach(createCustomSelect);
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();

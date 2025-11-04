@@ -50,27 +50,29 @@ $post_format_gallery = function_exists('get_field') ? get_field('post_format_gal
 <?php else: ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class('blog-card d-flex flex-column h-100'); ?>>
-        <div class="blog-card__header">
-            <?php if (!empty($post_format_gallery)): ?>
-                <div class="blog-card__image-wrap">
-                    <?php get_template_part('template-parts/blog-part/gallery'); ?>
-                </div>
-            <?php elseif (has_post_thumbnail()): ?>
-                <div class="blog-card__image-wrap">
-                    <a href="<?php echo esc_url(get_permalink()); ?>">
-                        <?php the_post_thumbnail(
-                            'large',
-                            array(
-                                'class' => 'blog-card__image',
-                                'alt' => esc_attr(get_the_title())
-                            )
-                        ); ?>
-                    </a>
-                </div>
-            <?php endif; ?>
+        <?php if (has_post_thumbnail() || $post_format_gallery): ?>
+            <div class="blog-card__header">
+                <?php if (!empty($post_format_gallery)): ?>
+                    <div class="blog-card__image-wrap">
+                        <?php get_template_part('template-parts/blog-part/gallery'); ?>
+                    </div>
+                <?php elseif (has_post_thumbnail()): ?>
+                    <div class="blog-card__image-wrap">
+                        <a href="<?php echo esc_url(get_permalink()); ?>">
+                            <?php the_post_thumbnail(
+                                'large',
+                                array(
+                                    'class' => 'blog-card__image',
+                                    'alt' => esc_attr(get_the_title())
+                                )
+                            ); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
 
-            <?php get_template_part('template-parts/blog-part/badge'); ?>
-        </div>
+                <?php get_template_part('template-parts/blog-part/badge'); ?>
+            </div>
+        <?php endif; ?>
 
         <div class="blog-card__body">
             <?php if (get_the_title()): ?>
