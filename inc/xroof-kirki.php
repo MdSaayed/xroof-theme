@@ -246,8 +246,6 @@ function xroof_offcanvas_section()
 }
 xroof_offcanvas_section();
 
-
-
 function xroof_footer_sections()
 {
     new \Kirki\Section(
@@ -337,7 +335,6 @@ function xroof_breadcrumb_section()
 
 }
 xroof_breadcrumb_section();
-
 
 function xroof_header_info_slide_box_section()
 {

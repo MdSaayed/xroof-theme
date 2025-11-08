@@ -17289,7 +17289,6 @@ SCSS INDEX
   padding: 1.5rem;
   border-radius: 8px;
   background: #000;
-  min-height: 500px;
   height: 100%;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -17302,9 +17301,19 @@ SCSS INDEX
   line-height: 120%;
   letter-spacing: 0.32px;
   color: #ffffff;
+  display: inline-block;
+  max-width: 30ch;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .services--style-4 .services__item-text {
   color: #ffffff;
+  display: inline-block;
+  max-width: 120ch;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .services--style-4 .services__item:hover {
   -webkit-transform: translateY(-4px);
@@ -17330,6 +17339,7 @@ SCSS INDEX
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  aspect-ratio: 9/6;
 }
 .services--style-4 .services__content {
   display: -webkit-box;
@@ -18200,11 +18210,7 @@ SCSS INDEX
   z-index: 1;
 }
 .achievement__container {
-  padding-left: 240px;
-  padding-right: 240px;
-  padding-top: 112px;
   position: relative;
-  padding-bottom: 112px;
   z-index: 999;
 }
 
@@ -19353,7 +19359,7 @@ SCSS INDEX
 }
 .blog--style-2 .blog__img-wrap {
   max-height: 325px;
-  aspect-ratio: 12/9;
+  width: 100%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -19517,10 +19523,14 @@ SCSS INDEX
 .blog--style-3 .blog__author-name, .blog--style-3 .blog__author-company {
   color: #ffffff;
 }
+.blog--style-3 .blog__middle {
+  height: 100%;
+}
 .blog--style-3 .blog__thumb-wrap {
   max-width: 300px;
   max-height: 250px;
   margin: 0 auto;
+  height: 100%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -19535,6 +19545,7 @@ SCSS INDEX
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  aspect-ratio: 9/6;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
@@ -20106,6 +20117,13 @@ SCSS INDEX
 .footer--style-2 .footer__action-btn:hover {
   background: #EE212B;
   color: #ffffff;
+}
+.footer--style-2 .footer__nav a {
+  display: inline-block;
+  max-width: 30ch;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .footer--style-2 .footer__nav li a, .footer--style-2 .footer__nav-link li a, .footer--style-2 .footer__hour, .footer--style-2 .footer__address {
   color: rgba(255, 255, 255, 0.54);

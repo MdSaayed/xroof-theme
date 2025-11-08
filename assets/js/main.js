@@ -178,7 +178,7 @@ function xroof_counter() {
 /* =============================
 * 5. Glightbox
 ============================= */
-function xroof_hero_3() {
+function xroof_glightbox() {
   const lightbox = GLightbox({
     selector: '.glightbox',
     autoplayVideos: true
@@ -917,10 +917,6 @@ window.addEventListener("elementor/frontend/init", function () {
       xroof_video_play
     );
     elementorFrontend.hooks.addAction(
-      'frontend/element_ready/xroof-hero-3.default',
-      xroof_hero_3
-    );
-    elementorFrontend.hooks.addAction(
       'frontend/element_ready/xroof_project_widget_1.default',
       xroof_project_filter
     );
@@ -960,6 +956,7 @@ window.addEventListener("elementor/frontend/init", function () {
         xroof_blog_gallery_slider();
         xroof_nav_arrow_toggle();
         xroof_offcanvas();
+        xroof_glightbox();
       }
     );
   }

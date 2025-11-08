@@ -207,7 +207,7 @@
                 }
 
                 @include bp.respond-to(md) {
-                    margin-top: -170px;      
+                    margin-top: -170px;
                 }
             }
 
@@ -503,7 +503,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                object-fit: cover; 
+                object-fit: cover;
                 z-index: 1;
             }
         }
@@ -525,17 +525,26 @@
                 padding: 1.5rem;
                 border-radius: 8px;
                 background: $color-black;
-                min-height: 500px;
                 height: 100%;
                 transition: all 0.5s ease;
                 overflow: hidden;
 
                 &-title {
-                    @include title-sm($color-white)
+                    @include title-sm($color-white);
+                    display: inline-block;
+                    max-width: 30ch;
+                    white-space: wrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 &-text {
                     color: $color-white;
+                    display: inline-block;
+                    max-width: 120ch;
+                    white-space: wrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 &:hover {
@@ -564,6 +573,7 @@
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    aspect-ratio: 9 / 6;
                 }
             }
 

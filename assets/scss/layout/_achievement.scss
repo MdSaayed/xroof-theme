@@ -143,11 +143,7 @@
     }
 
     &__container {
-        padding-left: 240px;
-        padding-right: 240px;
-        padding-top: 112px;
         position: relative;
-        padding-bottom: 112px;
-        z-index: 999;
+        z-index: 999; 
     }
 }
