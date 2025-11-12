@@ -128,7 +128,7 @@ function xroof_information_box_logo()
         </div>
     <?php endif; ?>
 <?php
-}
+} 
 
 function xroof_footer_copyright()
 {
